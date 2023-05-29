@@ -1,7 +1,6 @@
 library rx_mvvm;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'package:rx_command/rx_command.dart';
+export 'package:rx_command/rx_command_listener.dart';
+
+export 'annotations.dart';
