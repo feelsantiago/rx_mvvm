@@ -35,17 +35,27 @@ enum CommandExecutionType {
 
 class CommandReturn {
   final String _type;
+  final bool hasReturn;
   final CommandExecutionType execution;
 
-  CommandReturn(this._type, this.execution);
+  CommandReturn(this._type, this.hasReturn, this.execution);
+
   CommandReturn.from(MethodElement method)
       : _type = method.returnType.getDisplayString(withNullability: true),
+        hasReturn = method.returnType is! VoidType,
         execution = CommandExecutionType.from(method.returnType);
-  CommandReturn.sync(this._type) : execution = CommandExecutionType.sync;
-  CommandReturn.async(this._type) : execution = CommandExecutionType.async;
-  CommandReturn.stream(this._type) : execution = CommandExecutionType.stream;
+  CommandReturn.sync(this._type)
+      : execution = CommandExecutionType.sync,
+        hasReturn = _type != 'void';
+  CommandReturn.async(this._type)
+      : execution = CommandExecutionType.async,
+        hasReturn = _type != 'void';
+  CommandReturn.stream(this._type)
+      : execution = CommandExecutionType.stream,
+        hasReturn = _type != 'void';
   const CommandReturn.empty()
       : _type = 'void',
+        hasReturn = false,
         execution = CommandExecutionType.sync;
 
   String type() {
@@ -57,12 +67,15 @@ class CommandReturn {
       CommandExecutionType.sync => _type,
     };
   }
+
+  String definition() {
+    return hasReturn ? '' : 'NoReturn';
+  }
 }
 
 class CommandGenerator {
   final Name name;
 
-  final bool hasReturn;
   final bool hasParam;
 
   final CommandExecutionType execution;
@@ -71,7 +84,6 @@ class CommandGenerator {
 
   CommandGenerator({
     required String name,
-    this.hasReturn = false,
     this.hasParam = false,
     this.paramType = 'void',
     this.returnType = const CommandReturn.empty(),
@@ -80,20 +92,19 @@ class CommandGenerator {
         execution = CommandExecutionType.isAsync(isAsync);
 
   factory CommandGenerator.from(MethodElement method) {
-    final isAsync = method.isAsynchronous;
-    final hasReturn = (method.returnType is! VoidType);
+    // TODO: save checker object
     final hasParam = method.parameters.isNotEmpty;
 
     if (method.parameters.length > 1) {
       throw Exception('Commands must have only one parameter');
     }
 
+    // TODO: refactor param
     final param = method.parameters.firstOrNull;
 
     return CommandGenerator(
       name: method.name,
-      isAsync: isAsync,
-      hasReturn: hasReturn,
+      isAsync: method.isAsynchronous,
       hasParam: hasParam,
       paramType: param?.type.getDisplayString(withNullability: true) ?? 'void',
       returnType: CommandReturn.from(method),
@@ -119,10 +130,9 @@ class CommandGenerator {
   String initialization() {
     final action = name.command();
     final param = hasParam ? '' : 'NoParam';
-    final ret = hasReturn ? '' : 'NoResult';
 
     return '''
-      _$action = RxCommand.create$execution$param$ret(super.${name.original});
+      _$action = RxCommand.create${execution.alias}$param${returnType.definition()}(super.${name.original});
       $action = CommandEvents(_$action);
     ''';
   }
