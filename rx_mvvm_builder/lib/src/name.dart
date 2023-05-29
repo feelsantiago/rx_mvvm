@@ -1,23 +1,28 @@
 import 'package:analyzer/dart/element/element.dart';
 
+import 'string_extensions.dart';
+
 class Name {
-  final String name;
+  final String _name;
 
-  Name(String name) : name = name.toLowerCase().replaceAll('_', '');
-  Name.from(ClassElement element)
-      : name = element.name.toLowerCase().replaceAll('_', '');
+  String get original => _name;
 
-  bool _hasVmSufix() {
-    return name.contains('viewmodel');
+  Name(this._name);
+  Name.from(ClassElement element) : _name = element.name;
+  Name.method(MethodElement method) : _name = method.name;
+
+  String sanitize() {
+    return _name
+        .captilizeFirst()
+        .replaceFirst('ViewModel', '')
+        .replaceFirst('Viewmodel', '');
   }
 
-  String generate() {
-    if (_hasVmSufix()) {
-      final base = name.replaceFirst('viewmodel', '');
+  String mixin() {
+    return '_${sanitize()}Commands';
+  }
 
-      return '${base[0].toUpperCase()}${base.substring(1)}';
-    }
-
-    return name;
+  String command() {
+    return 'on${_name.captilizeFirst()}';
   }
 }

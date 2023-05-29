@@ -10,6 +10,7 @@ class CommandEvents<TParam, TResult> {
   late final Stream<CommandResult<TParam, TResult>> results;
   late final Stream exceptions;
   late final Stream<bool> executing;
+  late final Stream<bool> canExecute;
 
   late final StreamSubscription _subscription;
 
@@ -18,6 +19,7 @@ class CommandEvents<TParam, TResult> {
     results = command.results;
     executing = command.isExecuting;
     exceptions = command.thrownExceptions;
+    canExecute = command.canExecute;
 
     _subscription = executing.listen((error) {
       if (!kReleaseMode) {

@@ -3,18 +3,24 @@ import 'package:test/test.dart';
 
 void main() {
   group('Name', () {
-    test('Should derive builder name', () {
-      final name = Name('TestViewModel');
-      final name1 = Name('Test_View_Model');
-      final name2 = Name('testviewmodel');
-      final name3 = Name('test_view_model');
-      final name4 = Name('view_model_test');
+    test('Should remove view model from the name', () {
+      final name1 = Name('TestViewModel');
+      final name2 = Name('TestViewmodel');
+      final name3 = Name('TestAgainViewModel');
 
-      expect(name.generate(), 'Test');
-      expect(name1.generate(), 'Test');
-      expect(name2.generate(), 'Test');
-      expect(name3.generate(), 'Test');
-      expect(name4.generate(), 'Test');
+      expect(name1.sanitize(), 'Test');
+      expect(name2.sanitize(), 'Test');
+      expect(name3.sanitize(), 'TestAgain');
+    });
+
+    test('Should return method name', () {
+      final name = Name('test');
+      expect(name.sanitize(), 'Test');
+    });
+
+    test('Should create mixin name', () {
+      final name = Name('TestViewModel');
+      expect(name.mixin(), '_TestCommands');
     });
   });
 }
