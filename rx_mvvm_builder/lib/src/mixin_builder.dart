@@ -7,7 +7,7 @@ import 'package:source_gen/source_gen.dart';
 class MixinBuilder implements MvvBuilder {
   final ClassElement element;
 
-  String get name => '_${Name.from(element)}Commands';
+  String get name => '_${Name.from(element).mixin()}';
 
   MixinBuilder(this.element);
 

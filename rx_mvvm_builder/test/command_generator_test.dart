@@ -1,4 +1,5 @@
 import 'package:rx_mvvm_builder/src/command_generator.dart';
+import 'package:rx_mvvm_builder/src/command_return.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -22,7 +23,6 @@ void main() {
       final command = CommandGenerator(
         name: 'test',
         isAsync: false,
-        hasReturn: true,
         returnType: CommandReturn.sync('String'),
       );
 
@@ -39,7 +39,6 @@ void main() {
       final command = CommandGenerator(
         name: 'test',
         isAsync: false,
-        hasReturn: true,
         returnType: CommandReturn.sync('String'),
         hasParam: true,
         paramType: 'String',
@@ -58,7 +57,6 @@ void main() {
       final command = CommandGenerator(
         name: 'test',
         isAsync: false,
-        hasReturn: true,
         returnType: CommandReturn.async('Future<String>'),
         hasParam: true,
         paramType: 'String',
@@ -77,7 +75,6 @@ void main() {
       final command = CommandGenerator(
         name: 'test',
         isAsync: false,
-        hasReturn: true,
         returnType: CommandReturn.stream('Stream<String>'),
         hasParam: true,
         paramType: 'String',
