@@ -1,5 +1,6 @@
 import 'package:rx_mvvm_builder/src/command_generator.dart';
-import 'package:rx_mvvm_builder/src/command_return.dart';
+import 'package:rx_mvvm_builder/src/command_param.dart';
+import 'package:rx_mvvm_builder/src/command_result.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -23,7 +24,7 @@ void main() {
       final command = CommandGenerator(
         name: 'test',
         isAsync: false,
-        returnType: CommandReturn.sync('String'),
+        result: CommandResult.sync('String'),
       );
 
       final result = '''
@@ -39,9 +40,8 @@ void main() {
       final command = CommandGenerator(
         name: 'test',
         isAsync: false,
-        returnType: CommandReturn.sync('String'),
-        hasParam: true,
-        paramType: 'String',
+        result: CommandResult.sync('String'),
+        param: CommandParam.type('String'),
       );
 
       final result = '''
@@ -57,9 +57,8 @@ void main() {
       final command = CommandGenerator(
         name: 'test',
         isAsync: false,
-        returnType: CommandReturn.async('Future<String>'),
-        hasParam: true,
-        paramType: 'String',
+        result: CommandResult.async('Future<String>'),
+        param: CommandParam.type('String'),
       );
 
       final result = '''
@@ -75,9 +74,8 @@ void main() {
       final command = CommandGenerator(
         name: 'test',
         isAsync: false,
-        returnType: CommandReturn.stream('Stream<String>'),
-        hasParam: true,
-        paramType: 'String',
+        result: CommandResult.stream('Stream<String>'),
+        param: CommandParam.type('String'),
       );
 
       final result = '''
