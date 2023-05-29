@@ -26,6 +26,11 @@ class CommandGenerator {
       throw Exception('Commands must have only one parameter');
     }
 
+    // TODO: Pass more info in the error
+    if (!method.isPrivate) {
+      throw Exception('Commands actions should be private');
+    }
+
     return CommandGenerator(
       name: method.name,
       isAsync: method.isAsynchronous,
