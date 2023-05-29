@@ -12,12 +12,11 @@ class CommandGenerator {
   final CommandResult result;
 
   CommandGenerator({
-    required String name,
+    required this.name,
     this.param = const CommandParam.empty(),
     this.result = const CommandResult.empty(),
     bool isAsync = false,
-  })  : name = Name(name),
-        execution = CommandExecutionType.isAsync(isAsync);
+  }) : execution = CommandExecutionType.isAsync(isAsync);
 
   factory CommandGenerator.from(MethodElement method) {
     // TODO: save checker object
@@ -32,7 +31,7 @@ class CommandGenerator {
     }
 
     return CommandGenerator(
-      name: method.name,
+      name: Name.method(method),
       isAsync: method.isAsynchronous,
       param: CommandParam.from(method),
       result: CommandResult.from(method),

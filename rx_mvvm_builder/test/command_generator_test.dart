@@ -1,13 +1,14 @@
 import 'package:rx_mvvm_builder/src/command_generator.dart';
 import 'package:rx_mvvm_builder/src/command_param.dart';
 import 'package:rx_mvvm_builder/src/command_result.dart';
+import 'package:rx_mvvm_builder/src/name.dart';
 import 'package:test/test.dart';
 
 void main() {
   group('CommandGenerator', () {
     test('Should generate command definition - No Param - No Result', () {
       final command = CommandGenerator(
-        name: 'test',
+        name: Name('test'),
         isAsync: false,
       );
 
@@ -22,7 +23,7 @@ void main() {
 
     test('Should generate command definition - No Param', () {
       final command = CommandGenerator(
-        name: 'test',
+        name: Name('test'),
         isAsync: false,
         result: CommandResult.sync('String'),
       );
@@ -38,7 +39,7 @@ void main() {
 
     test('Should generate command definition', () {
       final command = CommandGenerator(
-        name: 'test',
+        name: Name('test'),
         isAsync: false,
         result: CommandResult.sync('String'),
         param: CommandParam.type('String'),
@@ -55,7 +56,7 @@ void main() {
 
     test('Should remove Future<> from return type on definition', () {
       final command = CommandGenerator(
-        name: 'test',
+        name: Name('test'),
         isAsync: false,
         result: CommandResult.async('Future<String>'),
         param: CommandParam.type('String'),
@@ -72,7 +73,7 @@ void main() {
 
     test('Should remove Stream<> from return type on definition', () {
       final command = CommandGenerator(
-        name: 'test',
+        name: Name('test'),
         isAsync: false,
         result: CommandResult.stream('Stream<String>'),
         param: CommandParam.type('String'),
