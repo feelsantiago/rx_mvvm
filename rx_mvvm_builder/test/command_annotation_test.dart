@@ -17,7 +17,7 @@ void main() {
       when(annotation.getField('debugName')).thenReturn(debugName);
 
       final command = CommandAnnotation(annotation);
-      expect(command.debugName(), 'debugName: TestDebug');
+      expect(command.debugName(), 'debugName: "TestDebug"');
     });
 
     test('Should get emitInitialValue', () {
@@ -73,7 +73,7 @@ void main() {
       when(annotation.getField('emitLastValue')).thenReturn(emitLastValue);
 
       const result =
-          'debugName: TestDebug, emitInitialCommandResult: true, emitsLastValueToNewSubscriptions: false, restriction: super.canExecute';
+          'debugName: "TestDebug", emitInitialCommandResult: true, emitsLastValueToNewSubscriptions: false, restriction: super.canExecute';
 
       final command = CommandAnnotation(annotation);
       expect(command.parameters(), result);

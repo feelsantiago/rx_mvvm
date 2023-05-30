@@ -8,24 +8,19 @@ void main() {
       final name2 = Name('TestViewmodel');
       final name3 = Name('TestAgainViewModel');
 
-      expect(name1.sanitize(), 'Test');
-      expect(name2.sanitize(), 'Test');
-      expect(name3.sanitize(), 'TestAgain');
+      expect(name1.base(), 'Test');
+      expect(name2.base(), 'Test');
+      expect(name3.base(), 'TestAgain');
     });
 
     test('Should return method name', () {
       final name = Name('test');
-      expect(name.sanitize(), 'Test');
+      expect(name.base(), 'Test');
     });
 
     test('Sould return method name without private identifier', () {
       final name = Name('_test');
       expect(name.original, 'test');
-    });
-
-    test('Should create mixin name', () {
-      final name = Name('TestViewModel');
-      expect(name.mixin(), 'TestCommands');
     });
   });
 }

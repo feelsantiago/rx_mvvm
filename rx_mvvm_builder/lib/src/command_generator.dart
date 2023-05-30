@@ -86,6 +86,6 @@ class CommandGenerator implements CommandBuilder {
 
   @override
   String dispose() {
-    throw Exception('Implementar');
+    return '${name.command()}.dispose();';
   }
 }

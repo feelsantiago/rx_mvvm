@@ -12,8 +12,8 @@ class CommandAnnotation implements CommandAnnotationDefinition {
   String debugName() {
     final debugName = annotation!.getField('debugName');
 
-    if (debugName != null) {
-      return 'debugName: ${debugName.toStringValue()!}';
+    if (debugName != null && !debugName.isNull) {
+      return 'debugName: "${debugName.toStringValue()!}"';
     }
 
     return '';
@@ -23,7 +23,7 @@ class CommandAnnotation implements CommandAnnotationDefinition {
   String emitInitialValue() {
     final emitInitialValue = annotation!.getField('emitInitialValue');
 
-    if (emitInitialValue != null) {
+    if (emitInitialValue != null && !emitInitialValue.isNull) {
       final value = emitInitialValue.toBoolValue() ?? false;
       return 'emitInitialCommandResult: $value';
     }
@@ -35,7 +35,7 @@ class CommandAnnotation implements CommandAnnotationDefinition {
   String emitLastValue() {
     final emitLastValue = annotation!.getField('emitLastValue');
 
-    if (emitLastValue != null) {
+    if (emitLastValue != null && !emitLastValue.isNull) {
       final value = emitLastValue.toBoolValue() ?? false;
       return 'emitsLastValueToNewSubscriptions: $value';
     }
@@ -47,7 +47,7 @@ class CommandAnnotation implements CommandAnnotationDefinition {
   String restriction() {
     final restriction = annotation!.getField('restriction');
 
-    if (restriction != null) {
+    if (restriction != null && !restriction.isNull) {
       return 'restriction: super.${restriction.toStringValue()!}';
     }
 

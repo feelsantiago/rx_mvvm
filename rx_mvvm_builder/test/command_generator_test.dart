@@ -233,5 +233,17 @@ void main() {
         });
       });
     });
+
+    group('Dispose', () {
+      test('Should create dispose call', () {
+        final command = CommandGenerator(
+          name: Name('_test'),
+          annotation: const FakeCommandAnnotation(),
+        );
+
+        const result = 'onTest.dispose();';
+        expect(command.dispose(), result);
+      });
+    });
   });
 }

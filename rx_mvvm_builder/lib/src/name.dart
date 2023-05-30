@@ -12,15 +12,11 @@ class Name {
   Name.method(MethodElement method)
       : _name = method.name.removePrivateIdentifier();
 
-  String sanitize() {
+  String base() {
     return _name
         .captilizeFirst()
         .replaceFirst('ViewModel', '')
         .replaceFirst('Viewmodel', '');
-  }
-
-  String mixin() {
-    return '${sanitize()}Commands';
   }
 
   String command() {

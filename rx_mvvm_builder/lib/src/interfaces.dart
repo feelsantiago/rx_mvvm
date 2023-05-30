@@ -1,4 +1,5 @@
 abstract interface class MvvmBuilder {
+  String get name;
   String write();
 }
 

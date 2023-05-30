@@ -7,7 +7,8 @@ class CommandsMixinBuilder implements MvvmBuilder {
   final ClassElement element;
   final List<CommandGenerator> commands;
 
-  String get name => '_${Name.from(element).mixin()}';
+  @override
+  String get name => '_${Name.from(element).base()}Commands';
 
   CommandsMixinBuilder(this.element, this.commands);
 
