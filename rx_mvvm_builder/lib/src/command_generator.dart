@@ -1,5 +1,4 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:rx_mvvm/annotations.dart';
 import 'package:rx_mvvm_builder/src/command_param.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -27,12 +26,12 @@ class CommandGenerator implements CommandBuilder {
   factory CommandGenerator.from(MethodElement method, TypeChecker command) {
     if (method.parameters.length > 1) {
       throw Exception(
-          '"@Command()" on method "${method.name}" - Commands must have only one parameter');
+          '`@Command` on method "${method.name}" - Commands must have only one parameter');
     }
 
     if (!method.isPrivate) {
       throw Exception(
-        '"@Command()" on method "${method.name}" - Commands actions should be private',
+        '`@Command` on method "${method.name}" - Commands actions should be private',
       );
     }
 

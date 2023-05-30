@@ -26,7 +26,7 @@ class ViewModelGenerator extends GeneratorForAnnotation<ViewModel> {
         .toList();
 
     final mixin = MixinBuilder(element, commands);
-    // final class = ClassBuilder(element, commands);
+    // final class = ClassBuilder(element, [commandsMixin, injectableMixin] , commands);
 
     return mixin.write();
   }
