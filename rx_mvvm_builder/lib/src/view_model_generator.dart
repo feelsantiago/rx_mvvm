@@ -1,9 +1,11 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:rx_mvvm/rx_mvvm.dart';
-import 'package:rx_mvvm_builder/src/command_generator.dart';
-import 'package:rx_mvvm_builder/src/mixin_builder.dart';
 import 'package:source_gen/source_gen.dart';
+
+import 'class_builder.dart';
+import 'command_generator.dart';
+import 'commands_mixin_builder.dart';
 
 class ViewModelGenerator extends GeneratorForAnnotation<ViewModel> {
   @override
@@ -25,9 +27,16 @@ class ViewModelGenerator extends GeneratorForAnnotation<ViewModel> {
         .where((command) => command.defined())
         .toList();
 
-    final mixin = MixinBuilder(element, commands);
-    // final class = ClassBuilder(element, [commandsMixin, injectableMixin] , commands);
+    final rxcommands = CommandsMixinBuilder(element, commands);
+    final builder = ClassBuilder(
+      element,
+      commands,
+      mixins: [rxcommands /*, injectable mixin*/],
+    );
 
-    return mixin.write();
+    return '''
+      ${builder.write()}
+      ${rxcommands.write()}
+    ''';
   }
 }

@@ -1,4 +1,4 @@
-abstract interface class MvvBuilder {
+abstract interface class MvvmBuilder {
   String write();
 }
 
