@@ -71,10 +71,13 @@ class CommandGenerator implements CommandBuilder {
   @override
   String initialization() {
     final action = name.command();
-    final parameters = annotation.parameters();
+    final parameters = switch (annotation.exist()) {
+      true => ' ,${annotation.parameters()}',
+      false => '',
+    };
 
     return '''
-      _$action = RxCommand.create${execution.alias}${param.definition()}${result.definition()}(super.${name.original}, $parameters);
+      _$action = RxCommand.create${execution.alias}${param.definition()}${result.definition()}(super.${name.original}$parameters);
       $action = CommandEvents(_$action);
     ''';
   }

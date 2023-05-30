@@ -33,7 +33,7 @@ class CommandAnnotation implements CommandAnnotationDefinition {
 
   @override
   String emitLastValue() {
-    final emitLastValue = annotation!.getField('emitLasValue');
+    final emitLastValue = annotation!.getField('emitLastValue');
 
     if (emitLastValue != null) {
       final value = emitLastValue.toBoolValue() ?? false;
