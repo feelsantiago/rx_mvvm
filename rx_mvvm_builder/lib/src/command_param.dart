@@ -19,7 +19,8 @@ class CommandParam implements CommandTypeDefinition {
     }
 
     return CommandParam.type(
-        element.type.getDisplayString(withNullability: true));
+      element.type.getDisplayString(withNullability: true),
+    );
   }
 
   @override

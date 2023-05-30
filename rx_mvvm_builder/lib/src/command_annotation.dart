@@ -1,13 +1,6 @@
 import 'package:analyzer/dart/constant/value.dart';
 
-abstract interface class CommandAnnotationDefinition {
-  String emitInitialValue();
-  String emitLastValue();
-  String debugName();
-  String restriction();
-  String parameters();
-  bool exist();
-}
+import 'interfaces.dart';
 
 class CommandAnnotation implements CommandAnnotationDefinition {
   final DartObject? annotation;

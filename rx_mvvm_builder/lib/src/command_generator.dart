@@ -6,14 +6,8 @@ import 'package:source_gen/source_gen.dart';
 import 'command_annotation.dart';
 import 'command_execution_type.dart';
 import 'command_result.dart';
+import 'interfaces.dart';
 import 'name.dart';
-
-abstract interface class CommandBuilder {
-  String definition();
-  String action();
-  String initialization();
-  bool defined();
-}
 
 class CommandGenerator implements CommandBuilder {
   final Name name;
@@ -32,7 +26,8 @@ class CommandGenerator implements CommandBuilder {
 
   factory CommandGenerator.from(MethodElement method) {
     if (method.parameters.length > 1) {
-      throw Exception('Commands must have only one parameter');
+      throw Exception(
+          '"@Command()" on method "${method.name}" - Commands must have only one parameter');
     }
 
     if (!method.isPrivate) {

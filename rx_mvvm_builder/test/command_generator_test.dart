@@ -2,6 +2,7 @@ import 'package:rx_mvvm_builder/src/command_generator.dart';
 import 'package:rx_mvvm_builder/src/command_param.dart';
 import 'package:rx_mvvm_builder/src/command_result.dart';
 import 'package:rx_mvvm_builder/src/name.dart';
+import 'package:rx_mvvm_builder/src/string_extensions.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -17,9 +18,9 @@ void main() {
         late final RxCommand<void, void> _onTest;
         late final CommandEvents<void, void> onTest;
       '''
-            .replaceAll(' ', '');
+            .removeSpaces();
 
-        expect(command.definition().replaceAll(' ', ''), result);
+        expect(command.definition().removeSpaces(), result);
       });
 
       test('Should generate command definition - No Param', () {
@@ -33,9 +34,9 @@ void main() {
         late final RxCommand<void, String> _onTest;
         late final CommandEvents<void, String> onTest;
       '''
-            .replaceAll(' ', '');
+            .removeSpaces();
 
-        expect(command.definition().replaceAll(' ', ''), result);
+        expect(command.definition().removeSpaces(), result);
       });
 
       test('Should generate command definition', () {
@@ -50,9 +51,9 @@ void main() {
         late final RxCommand<String, String> _onTest;
         late final CommandEvents<String, String> onTest;
       '''
-            .replaceAll(' ', '');
+            .removeSpaces();
 
-        expect(command.definition().replaceAll(' ', ''), result);
+        expect(command.definition().removeSpaces(), result);
       });
 
       test('Should remove Future<> from return type on definition', () {
@@ -67,9 +68,9 @@ void main() {
         late final RxCommand<String, String> _onTest;
         late final CommandEvents<String, String> onTest;
       '''
-            .replaceAll(' ', '');
+            .removeSpaces();
 
-        expect(command.definition().replaceAll(' ', ''), result);
+        expect(command.definition().removeSpaces(), result);
       });
 
       test('Should remove Stream<> from return type on definition', () {
@@ -84,9 +85,9 @@ void main() {
         late final RxCommand<String, String> _onTest;
         late final CommandEvents<String, String> onTest;
       '''
-            .replaceAll(' ', '');
+            .removeSpaces();
 
-        expect(command.definition().replaceAll(' ', ''), result);
+        expect(command.definition().removeSpaces(), result);
       });
     });
 
@@ -99,8 +100,8 @@ void main() {
         );
 
         final result =
-            'void test(String param) => _onTest(param);\n'.replaceAll(' ', '');
-        expect(command.action().replaceAll(' ', ''), result);
+            'void test(String param) => _onTest(param);\n'.removeSpaces();
+        expect(command.action().removeSpaces(), result);
       });
 
       test('Should generate action without param', () {
@@ -109,8 +110,8 @@ void main() {
           result: CommandResult.sync('String'),
         );
 
-        final result = 'void test() => _onTest();\n'.replaceAll(' ', '');
-        expect(command.action().replaceAll(' ', ''), result);
+        final result = 'void test() => _onTest();\n'.removeSpaces();
+        expect(command.action().removeSpaces(), result);
       });
     });
 
@@ -125,9 +126,9 @@ void main() {
             _onTest = RxCommand.createSyncNoParamNoResult(super.test);
             onTest = CommandEvents(_onTest);
           '''
-              .replaceAll(' ', '');
+              .removeSpaces();
 
-          expect(command.initialization().replaceAll(' ', ''), result);
+          expect(command.initialization().removeSpaces(), result);
         });
 
         test('Should intialize command with no param', () {
@@ -140,9 +141,9 @@ void main() {
             _onTest = RxCommand.createSyncNoParam(super.test);
             onTest = CommandEvents(_onTest);
           '''
-              .replaceAll(' ', '');
+              .removeSpaces();
 
-          expect(command.initialization().replaceAll(' ', ''), result);
+          expect(command.initialization().removeSpaces(), result);
         });
 
         test('Should intialize command', () {
@@ -156,9 +157,9 @@ void main() {
             _onTest = RxCommand.createSync(super.test);
             onTest = CommandEvents(_onTest);
           '''
-              .replaceAll(' ', '');
+              .removeSpaces();
 
-          expect(command.initialization().replaceAll(' ', ''), result);
+          expect(command.initialization().removeSpaces(), result);
         });
       });
 
@@ -173,9 +174,9 @@ void main() {
             _onTest = RxCommand.createAsyncNoParamNoResult(super.test);
             onTest = CommandEvents(_onTest);
           '''
-              .replaceAll(' ', '');
+              .removeSpaces();
 
-          expect(command.initialization().replaceAll(' ', ''), result);
+          expect(command.initialization().removeSpaces(), result);
         });
 
         test('Should intialize command with no param', () {
@@ -189,9 +190,9 @@ void main() {
             _onTest = RxCommand.createAsyncNoParam(super.test);
             onTest = CommandEvents(_onTest);
           '''
-              .replaceAll(' ', '');
+              .removeSpaces();
 
-          expect(command.initialization().replaceAll(' ', ''), result);
+          expect(command.initialization().removeSpaces(), result);
         });
 
         test('Should intialize command', () {
@@ -206,9 +207,9 @@ void main() {
             _onTest = RxCommand.createAsync(super.test);
             onTest = CommandEvents(_onTest);
           '''
-              .replaceAll(' ', '');
+              .removeSpaces();
 
-          expect(command.initialization().replaceAll(' ', ''), result);
+          expect(command.initialization().removeSpaces(), result);
         });
       });
     });

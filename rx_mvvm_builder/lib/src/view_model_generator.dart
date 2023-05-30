@@ -19,8 +19,11 @@ class ViewModelGenerator extends GeneratorForAnnotation<ViewModel> {
       );
     }
 
-    final commands =
-        element.methods.map((method) => CommandGenerator.from(method)).toList();
+    final commands = element.methods
+        .map((method) => CommandGenerator.from(method))
+        .where((command) => command.defined())
+        .toList();
+
     final mixin = MixinBuilder(element, commands);
     // final class = ClassBuilder(element, commands);
 

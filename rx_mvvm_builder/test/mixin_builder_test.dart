@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:rx_mvvm_builder/src/command_generator.dart';
 import 'package:rx_mvvm_builder/src/mixin_builder.dart';
 import 'package:rx_mvvm_builder/src/name.dart';
+import 'package:rx_mvvm_builder/src/string_extensions.dart';
 import 'package:test/test.dart';
 
 @GenerateNiceMocks([MockSpec<ClassElement>()])
@@ -33,9 +34,9 @@ void main() {
             
         }
         '''
-          .replaceAll(' ', '');
+          .removeSpaces();
 
-      expect(mixin.write().replaceAll(' ', ''), result);
+      expect(mixin.write().removeSpaces(), result);
       verify(element.name).called(1);
     });
   });
