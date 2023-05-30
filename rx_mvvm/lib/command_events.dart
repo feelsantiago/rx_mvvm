@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:rx_command/rx_command.dart';
 
 class CommandEvents<TParam, TResult> {
@@ -22,10 +21,8 @@ class CommandEvents<TParam, TResult> {
     canExecute = command.canExecute;
 
     _subscription = executing.listen((error) {
-      if (!kReleaseMode) {
-        // ignore: avoid_print
-        print(error);
-      }
+      // ignore: avoid_print
+      print(error);
     });
   }
 

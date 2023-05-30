@@ -6,4 +6,12 @@ extension StringUtils on String {
   String removeSpaces() {
     return replaceAll(' ', '');
   }
+
+  String removePrivateIdentifier() {
+    if (this[0] == '_') {
+      return replaceFirst('_', '');
+    }
+
+    return this;
+  }
 }

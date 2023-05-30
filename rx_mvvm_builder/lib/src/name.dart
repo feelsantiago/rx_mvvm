@@ -4,12 +4,13 @@ import 'string_extensions.dart';
 
 class Name {
   final String _name;
-
   String get original => _name;
 
-  Name(this._name);
-  Name.from(ClassElement element) : _name = element.name;
-  Name.method(MethodElement method) : _name = method.name;
+  Name(String name) : _name = name.removePrivateIdentifier();
+  Name.from(ClassElement element)
+      : _name = element.name.removePrivateIdentifier();
+  Name.method(MethodElement method)
+      : _name = method.name.removePrivateIdentifier();
 
   String sanitize() {
     return _name

@@ -18,6 +18,11 @@ void main() {
       expect(name.sanitize(), 'Test');
     });
 
+    test('Sould return method name without private identifier', () {
+      final name = Name('_test');
+      expect(name.original, 'test');
+    });
+
     test('Should create mixin name', () {
       final name = Name('TestViewModel');
       expect(name.mixin(), 'TestCommands');
