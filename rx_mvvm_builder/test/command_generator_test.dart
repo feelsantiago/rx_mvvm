@@ -118,6 +118,24 @@ void main() {
     });
 
     group('Initialization', () {
+      test('Should initialize with parameters', () {
+        final command = CommandGenerator(
+          name: Name('test'),
+          annotation: const FakeCommandAnnotation(
+            fParameter: 'debugName: true, restriction: super.other',
+            fExist: true,
+          ),
+        );
+
+        final result = '''
+            _onTest = RxCommand.createSyncNoParamNoResult(super.test, debugName: true, restriction: super.other);
+            onTest = CommandEvents(_onTest);
+          '''
+            .removeSpaces();
+
+        expect(command.initialization().removeSpaces(), result);
+      });
+
       group('Sync', () {
         test('Should intialize command with no param and no return', () {
           final command = CommandGenerator(
