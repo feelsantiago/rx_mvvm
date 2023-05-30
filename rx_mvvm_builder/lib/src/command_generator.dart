@@ -49,9 +49,12 @@ class CommandGenerator {
 
   String action() {
     final action = name.original;
-    return '''
-      void $action(${param.type()} param) => _${name.command()}(param);
-    ''';
+
+    return switch (param.hasParam) {
+      true =>
+        'void $action(${param.type()} param) => _${name.command()}(param);\n',
+      false => 'void $action() => _${name.command()}();\n',
+    };
   }
 
   String initialization() {
