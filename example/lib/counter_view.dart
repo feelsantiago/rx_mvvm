@@ -1,5 +1,6 @@
 import 'package:example/counter_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:rx_mvvm/rx_mvvm.dart';
 
 class CounterView extends StatelessWidget {
   final String title;
@@ -22,9 +23,15 @@ class CounterView extends StatelessWidget {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Text(
-              '${viewModel.counter}',
-              style: Theme.of(context).textTheme.headlineMedium,
+            StreamBuilder(
+              stream: viewModel.onAdd.values,
+              initialData: viewModel.counter,
+              builder: (context, snapshot) {
+                return Text(
+                  '${snapshot.data}',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                );
+              },
             ),
           ],
         ),

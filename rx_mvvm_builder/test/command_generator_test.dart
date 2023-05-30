@@ -128,7 +128,7 @@ void main() {
         );
 
         final result = '''
-            _onTest = RxCommand.createSyncNoParamNoResult(super._test, debugName: true, restriction: super.other);
+            _onTest = RxCommand.createSyncNoParamNoResult(super._test, debugName: true, restriction: super.other,);
             onTest = CommandEvents(_onTest);
           '''
             .removeSpaces();

@@ -69,7 +69,7 @@ class CommandGenerator implements CommandBuilder {
   String initialization() {
     final action = name.command();
     final parameters = switch (annotation.exist()) {
-      true => ', ${annotation.parameters()}',
+      true => ', ${annotation.parameters()},',
       false => '',
     };
 

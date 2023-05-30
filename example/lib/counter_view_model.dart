@@ -10,7 +10,8 @@ class CounterViewModel with _CounterCommands {
   factory CounterViewModel() = _Counter;
 
   @Command(debugName: 'Counter')
-  void _add() {
+  int _add() {
     counter += 1;
+    return counter;
   }
 }

@@ -8,30 +8,23 @@ part of 'counter_view_model.dart';
 
 class _Counter extends CounterViewModel with _CounterCommands {
   _Counter() : super._() {
-    _onAdd = RxCommand.createSyncNoParamNoResult(super._add,
-        debugName: "Counter",
-        emitInitialCommandResult: false,
-        emitsLastValueToNewSubscriptions: false);
+    _onAdd = RxCommand.createSyncNoParam(
+      super._add,
+      debugName: "Counter",
+      emitInitialCommandResult: false,
+      emitsLastValueToNewSubscriptions: false,
+    );
     onAdd = CommandEvents(_onAdd);
-
-    _onRemove = RxCommand.createSyncNoParamNoResult(super.remove,
-        emitInitialCommandResult: false,
-        emitsLastValueToNewSubscriptions: false);
-    onRemove = CommandEvents(_onRemove);
   }
 
   void dispose() {
     onAdd.dispose();
-    onRemove.dispose();
   }
 }
 
 mixin _CounterCommands {
-  late final RxCommand<void, void> _onAdd;
-  late final CommandEvents<void, void> onAdd;
-  late final RxCommand<void, void> _onRemove;
-  late final CommandEvents<void, void> onRemove;
+  late final RxCommand<void, int> _onAdd;
+  late final CommandEvents<void, int> onAdd;
 
   void add() => _onAdd();
-  void remove() => _onRemove();
 }
