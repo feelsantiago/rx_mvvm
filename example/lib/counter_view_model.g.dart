@@ -8,7 +8,7 @@ part of 'counter_view_model.dart';
 
 class _Counter extends CounterViewModel with _CounterCommands {
   _Counter() : super._() {
-    _onAdd = RxCommand.createSyncNoParamNoResult(super.add,
+    _onAdd = RxCommand.createSyncNoParamNoResult(super._add,
         debugName: "Counter",
         emitInitialCommandResult: false,
         emitsLastValueToNewSubscriptions: false);

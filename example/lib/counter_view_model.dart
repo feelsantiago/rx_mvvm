@@ -4,14 +4,13 @@ part 'counter_view_model.g.dart';
 
 @ViewModel()
 class CounterViewModel with _CounterCommands {
+  int counter = 0;
+
   CounterViewModel._();
   factory CounterViewModel() = _Counter;
 
   @Command(debugName: 'Counter')
-  void _add() {}
-
-  @Command()
-  void _remove() {}
-
-  void _canCount() {}
+  void _add() {
+    counter += 1;
+  }
 }

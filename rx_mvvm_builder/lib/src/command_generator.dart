@@ -74,7 +74,7 @@ class CommandGenerator implements CommandBuilder {
     };
 
     return '''
-      _$action = RxCommand.create${execution.alias}${param.definition()}${result.definition()}(super.${name.original}$parameters);
+      _$action = RxCommand.create${execution.alias}${param.definition()}${result.definition()}(super._${name.original}$parameters);
       $action = CommandEvents(_$action);
     ''';
   }

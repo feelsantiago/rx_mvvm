@@ -128,7 +128,7 @@ void main() {
         );
 
         final result = '''
-            _onTest = RxCommand.createSyncNoParamNoResult(super.test, debugName: true, restriction: super.other);
+            _onTest = RxCommand.createSyncNoParamNoResult(super._test, debugName: true, restriction: super.other);
             onTest = CommandEvents(_onTest);
           '''
             .removeSpaces();
@@ -143,7 +143,7 @@ void main() {
           );
 
           final result = '''
-            _onTest = RxCommand.createSyncNoParamNoResult(super.test);
+            _onTest = RxCommand.createSyncNoParamNoResult(super._test);
             onTest = CommandEvents(_onTest);
           '''
               .removeSpaces();
@@ -158,7 +158,7 @@ void main() {
           );
 
           final result = '''
-            _onTest = RxCommand.createSyncNoParam(super.test);
+            _onTest = RxCommand.createSyncNoParam(super._test);
             onTest = CommandEvents(_onTest);
           '''
               .removeSpaces();
@@ -174,7 +174,7 @@ void main() {
               annotation: const FakeCommandAnnotation());
 
           final result = '''
-            _onTest = RxCommand.createSync(super.test);
+            _onTest = RxCommand.createSync(super._test);
             onTest = CommandEvents(_onTest);
           '''
               .removeSpaces();
@@ -191,7 +191,7 @@ void main() {
               annotation: const FakeCommandAnnotation());
 
           final result = '''
-            _onTest = RxCommand.createAsyncNoParamNoResult(super.test);
+            _onTest = RxCommand.createAsyncNoParamNoResult(super._test);
             onTest = CommandEvents(_onTest);
           '''
               .removeSpaces();
@@ -207,7 +207,7 @@ void main() {
               annotation: const FakeCommandAnnotation());
 
           final result = '''
-            _onTest = RxCommand.createAsyncNoParam(super.test);
+            _onTest = RxCommand.createAsyncNoParam(super._test);
             onTest = CommandEvents(_onTest);
           '''
               .removeSpaces();
@@ -224,7 +224,7 @@ void main() {
               annotation: const FakeCommandAnnotation());
 
           final result = '''
-            _onTest = RxCommand.createAsync(super.test);
+            _onTest = RxCommand.createAsync(super._test);
             onTest = CommandEvents(_onTest);
           '''
               .removeSpaces();
