@@ -9,10 +9,13 @@ part of 'counter_view_model.dart';
 class _Counter extends CounterViewModel with _CounterCommands {
   _Counter() : super._() {
     _onAdd = RxCommand.createSyncNoParamNoResult(super.add,
-        debugName: "Counter", emitsLastValueToNewSubscriptions: false);
+        debugName: "Counter",
+        emitInitialCommandResult: false,
+        emitsLastValueToNewSubscriptions: false);
     onAdd = CommandEvents(_onAdd);
 
     _onRemove = RxCommand.createSyncNoParamNoResult(super.remove,
+        emitInitialCommandResult: false,
         emitsLastValueToNewSubscriptions: false);
     onRemove = CommandEvents(_onRemove);
   }
