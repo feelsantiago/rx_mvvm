@@ -19,15 +19,14 @@ class CommandGenerator {
   }) : execution = CommandExecutionType.isAsync(isAsync);
 
   factory CommandGenerator.from(MethodElement method) {
-    // TODO: save checker object
-
     if (method.parameters.length > 1) {
       throw Exception('Commands must have only one parameter');
     }
 
-    // TODO: Pass more info in the error
     if (!method.isPrivate) {
-      throw Exception('Commands actions should be private');
+      throw Exception(
+        '"@Command()" on method "${method.name}" - Commands actions should be private',
+      );
     }
 
     return CommandGenerator(

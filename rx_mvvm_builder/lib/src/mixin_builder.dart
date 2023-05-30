@@ -15,8 +15,8 @@ class MixinBuilder implements MvvBuilder {
   String write() {
     return '''
         mixin $name {
-          ${commands.map((command) => command.definition()).join('\n')}         
-          ${commands.map((command) => command.action()).join('\n')}         
+          ${commands.map((command) => command.definition()).join('')}         
+          ${commands.map((command) => command.action()).join('')}         
         }
     ''';
   }

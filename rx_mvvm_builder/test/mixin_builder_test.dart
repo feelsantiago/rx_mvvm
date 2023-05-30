@@ -25,14 +25,12 @@ void main() {
         mixin _TestCommands {
             late final RxCommand<void, void> _onTest;
             late final CommandEvents<void, void> onTest;
-
             late final RxCommand<void, void> _onOther;
             late final CommandEvents<void, void> onOther;
 
             void test() => _onTest();
-
             void other() => _onOther();
-
+            
         }
         '''
           .replaceAll(' ', '');
