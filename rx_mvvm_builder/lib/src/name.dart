@@ -19,7 +19,7 @@ class Name {
   }
 
   String mixin() {
-    return '_${sanitize()}Commands';
+    return '${sanitize()}Commands';
   }
 
   String command() {

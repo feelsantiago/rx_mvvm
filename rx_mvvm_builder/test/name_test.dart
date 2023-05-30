@@ -20,7 +20,7 @@ void main() {
 
     test('Should create mixin name', () {
       final name = Name('TestViewModel');
-      expect(name.mixin(), '_TestCommands');
+      expect(name.mixin(), 'TestCommands');
     });
   });
 }
