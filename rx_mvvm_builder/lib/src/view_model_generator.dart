@@ -19,8 +19,6 @@ class ViewModelGenerator extends GeneratorForAnnotation<ViewModel> {
       );
     }
 
-    const checker = TypeChecker.fromRuntime(Command);
-
     final commands =
         element.methods.map((method) => CommandGenerator.from(method)).toList();
     final mixin = MixinBuilder(element, commands);

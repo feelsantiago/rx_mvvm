@@ -1,20 +1,32 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:rx_mvvm/annotations.dart';
 import 'package:rx_mvvm_builder/src/command_param.dart';
+import 'package:source_gen/source_gen.dart';
 
+import 'command_annotation.dart';
 import 'command_execution_type.dart';
 import 'command_result.dart';
 import 'name.dart';
 
-class CommandGenerator {
+abstract interface class CommandBuilder {
+  String definition();
+  String action();
+  String initialization();
+  bool defined();
+}
+
+class CommandGenerator implements CommandBuilder {
   final Name name;
   final CommandExecutionType execution;
   final CommandParam param;
   final CommandResult result;
+  final CommandAnnotationDefinition annotation;
 
   CommandGenerator({
     required this.name,
     this.param = const CommandParam.empty(),
     this.result = const CommandResult.empty(),
+    this.annotation = const CommandAnnotation.empty(),
     bool isAsync = false,
   }) : execution = CommandExecutionType.isAsync(isAsync);
 
@@ -29,14 +41,18 @@ class CommandGenerator {
       );
     }
 
+    const checker = TypeChecker.fromRuntime(Command);
+
     return CommandGenerator(
       name: Name.method(method),
       isAsync: method.isAsynchronous,
       param: CommandParam.from(method),
       result: CommandResult.from(method),
+      annotation: CommandAnnotation(checker.firstAnnotationOfExact(method)),
     );
   }
 
+  @override
   String definition() {
     final action = name.command();
 
@@ -46,6 +62,7 @@ class CommandGenerator {
     ''';
   }
 
+  @override
   String action() {
     final action = name.original;
 
@@ -56,12 +73,19 @@ class CommandGenerator {
     };
   }
 
+  @override
   String initialization() {
     final action = name.command();
+    final parameters = annotation.parameters();
 
     return '''
-      _$action = RxCommand.create${execution.alias}${param.definition()}${result.definition()}(super.${name.original});
+      _$action = RxCommand.create${execution.alias}${param.definition()}${result.definition()}(super.${name.original}, $parameters);
       $action = CommandEvents(_$action);
     ''';
+  }
+
+  @override
+  bool defined() {
+    return annotation.exist();
   }
 }
