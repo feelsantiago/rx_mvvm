@@ -12,7 +12,7 @@ void main() {
     group('Definition', () {
       test('Should generate command definition - No Param - No Result', () {
         final command = CommandGenerator(
-            name: Name('test'),
+            name: Name('_test'),
             isAsync: false,
             annotation: const FakeCommandAnnotation());
 
@@ -27,7 +27,7 @@ void main() {
 
       test('Should generate command definition - No Param', () {
         final command = CommandGenerator(
-            name: Name('test'),
+            name: Name('_test'),
             isAsync: false,
             result: CommandResult.sync('String'),
             annotation: const FakeCommandAnnotation());
@@ -43,7 +43,7 @@ void main() {
 
       test('Should generate command definition', () {
         final command = CommandGenerator(
-            name: Name('test'),
+            name: Name('_test'),
             isAsync: false,
             result: CommandResult.sync('String'),
             param: CommandParam.type('String'),
@@ -60,7 +60,7 @@ void main() {
 
       test('Should remove Future<> from return type on definition', () {
         final command = CommandGenerator(
-            name: Name('test'),
+            name: Name('_test'),
             isAsync: false,
             result: CommandResult.async('Future<String>'),
             param: CommandParam.type('String'),
@@ -77,7 +77,7 @@ void main() {
 
       test('Should remove Stream<> from return type on definition', () {
         final command = CommandGenerator(
-            name: Name('test'),
+            name: Name('_test'),
             isAsync: false,
             result: CommandResult.stream('Stream<String>'),
             param: CommandParam.type('String'),
@@ -96,7 +96,7 @@ void main() {
     group('Action', () {
       test('Should generate action with param', () {
         final command = CommandGenerator(
-            name: Name('test'),
+            name: Name('_test'),
             result: CommandResult.sync('String'),
             param: CommandParam.type('String'),
             annotation: const FakeCommandAnnotation());
@@ -108,7 +108,7 @@ void main() {
 
       test('Should generate action without param', () {
         final command = CommandGenerator(
-            name: Name('test'),
+            name: Name('_test'),
             result: CommandResult.sync('String'),
             annotation: const FakeCommandAnnotation());
 
@@ -139,7 +139,7 @@ void main() {
       group('Sync', () {
         test('Should intialize command with no param and no return', () {
           final command = CommandGenerator(
-            name: Name('test'),
+            name: Name('_test'),
           );
 
           final result = '''
@@ -153,7 +153,7 @@ void main() {
 
         test('Should intialize command with no param', () {
           final command = CommandGenerator(
-            name: Name('test'),
+            name: Name('_test'),
             result: CommandResult.sync('String'),
           );
 
@@ -168,7 +168,7 @@ void main() {
 
         test('Should intialize command', () {
           final command = CommandGenerator(
-              name: Name('test'),
+              name: Name('_test'),
               result: CommandResult.sync('String'),
               param: CommandParam.type('String'),
               annotation: const FakeCommandAnnotation());
@@ -187,7 +187,7 @@ void main() {
         test('Should intialize command with no param and no return', () {
           final command = CommandGenerator(
               isAsync: true,
-              name: Name('test'),
+              name: Name('_test'),
               annotation: const FakeCommandAnnotation());
 
           final result = '''
@@ -201,7 +201,7 @@ void main() {
 
         test('Should intialize command with no param', () {
           final command = CommandGenerator(
-              name: Name('test'),
+              name: Name('_test'),
               isAsync: true,
               result: CommandResult.sync('String'),
               annotation: const FakeCommandAnnotation());
@@ -217,7 +217,7 @@ void main() {
 
         test('Should intialize command', () {
           final command = CommandGenerator(
-              name: Name('test'),
+              name: Name('_test'),
               isAsync: true,
               result: CommandResult.sync('String'),
               param: CommandParam.type('String'),

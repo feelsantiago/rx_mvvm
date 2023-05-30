@@ -11,6 +11,7 @@ abstract interface class CommandBuilder {
   String definition();
   String action();
   String initialization();
+  String dispose();
   bool defined();
 }
 

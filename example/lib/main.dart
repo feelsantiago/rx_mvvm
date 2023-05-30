@@ -1,3 +1,4 @@
+import 'package:example/counter_view_model.dart';
 import 'package:flutter/material.dart';
 
 void main() {

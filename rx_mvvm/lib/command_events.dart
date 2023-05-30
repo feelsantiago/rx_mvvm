@@ -20,7 +20,7 @@ class CommandEvents<TParam, TResult> {
     exceptions = command.thrownExceptions;
     canExecute = command.canExecute;
 
-    _subscription = executing.listen((error) {
+    _subscription = exceptions.listen((error) {
       // ignore: avoid_print
       print(error);
     });

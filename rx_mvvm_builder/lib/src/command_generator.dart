@@ -24,7 +24,7 @@ class CommandGenerator implements CommandBuilder {
     bool isAsync = false,
   }) : execution = CommandExecutionType.isAsync(isAsync);
 
-  factory CommandGenerator.from(MethodElement method) {
+  factory CommandGenerator.from(MethodElement method, TypeChecker command) {
     if (method.parameters.length > 1) {
       throw Exception(
           '"@Command()" on method "${method.name}" - Commands must have only one parameter');
@@ -36,14 +36,12 @@ class CommandGenerator implements CommandBuilder {
       );
     }
 
-    const checker = TypeChecker.fromRuntime(Command);
-
     return CommandGenerator(
       name: Name.method(method),
       isAsync: method.isAsynchronous,
       param: CommandParam.from(method),
       result: CommandResult.from(method),
-      annotation: CommandAnnotation(checker.firstAnnotationOfExact(method)),
+      annotation: CommandAnnotation(command.firstAnnotationOfExact(method)),
     );
   }
 
@@ -85,5 +83,10 @@ class CommandGenerator implements CommandBuilder {
   @override
   bool defined() {
     return annotation.exist();
+  }
+
+  @override
+  String dispose() {
+    throw Exception('Implementar');
   }
 }
