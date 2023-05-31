@@ -5,8 +5,8 @@ class CommandParam implements CommandTypeDefinition {
   final String _type;
   final bool hasParam;
 
-  CommandParam(this._type, this.hasParam);
-  CommandParam.type(this._type) : hasParam = true;
+  const CommandParam(this._type, this.hasParam);
+  const CommandParam.type(this._type) : hasParam = true;
   const CommandParam.empty()
       : _type = 'void',
         hasParam = false;

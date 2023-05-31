@@ -12,8 +12,8 @@ class CommandsMixinBuilder implements MvvmMixin {
   @override
   String get name => '_${Name.from(element).base()}Commands';
 
-  CommandsMixinBuilder._(this.element, this.commands);
-  CommandsMixinBuilder.from(this.element, this.commands);
+  const CommandsMixinBuilder._(this.element, this.commands);
+  const CommandsMixinBuilder.from(this.element, this.commands);
 
   factory CommandsMixinBuilder(ClassElement element) {
     const checker = TypeChecker.fromRuntime(Command);

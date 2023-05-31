@@ -9,7 +9,7 @@ class ClassBuilder implements MvvmBuilder {
   @override
   String get name => '_${Name.from(element).base()}';
 
-  ClassBuilder(
+  const ClassBuilder(
     this.element, {
     this.mixins = const [],
   });

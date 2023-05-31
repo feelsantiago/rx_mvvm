@@ -11,7 +11,7 @@ abstract class CommandAction implements CommandActionBuilder {
   final CommandResult result;
   final CommandAnnotationDefinition annotation;
 
-  CommandAction(
+  const CommandAction(
     this.action,
     this.param,
     this.result,
@@ -43,7 +43,7 @@ abstract class CommandAction implements CommandActionBuilder {
 class CommandDefaultAction extends CommandAction {
   final CommandExecutionType execution;
 
-  CommandDefaultAction(
+  const CommandDefaultAction(
     super.action,
     super.param,
     super.result,
@@ -58,7 +58,7 @@ class CommandDefaultAction extends CommandAction {
 }
 
 class CommandStreamAction extends CommandAction {
-  CommandStreamAction(
+  const CommandStreamAction(
     super.action,
     super.param,
     super.result,

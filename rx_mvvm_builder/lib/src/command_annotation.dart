@@ -5,7 +5,7 @@ import 'interfaces.dart';
 class CommandAnnotation implements CommandAnnotationDefinition {
   final DartObject? annotation;
 
-  CommandAnnotation(this.annotation);
+  const CommandAnnotation(this.annotation);
   const CommandAnnotation.empty() : annotation = null;
 
   @override

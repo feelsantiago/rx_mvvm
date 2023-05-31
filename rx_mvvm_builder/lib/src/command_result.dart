@@ -9,19 +9,19 @@ class CommandResult implements CommandTypeDefinition {
   final bool hasResult;
   final CommandExecutionType execution;
 
-  CommandResult(this._type, this.hasResult, this.execution);
+  const CommandResult(this._type, this.hasResult, this.execution);
 
   CommandResult.from(MethodElement method)
       : _type = method.returnType.getDisplayString(withNullability: true),
         hasResult = method.returnType is! VoidType,
         execution = CommandExecutionType.from(method.returnType);
-  CommandResult.sync(this._type)
+  const CommandResult.sync(this._type)
       : execution = CommandExecutionType.sync,
         hasResult = _type != 'void';
-  CommandResult.async(this._type)
+  const CommandResult.async(this._type)
       : execution = CommandExecutionType.async,
         hasResult = _type != 'void';
-  CommandResult.stream(this._type)
+  const CommandResult.stream(this._type)
       : execution = CommandExecutionType.stream,
         hasResult = _type != 'void';
   const CommandResult.empty()
