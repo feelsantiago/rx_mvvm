@@ -3,6 +3,11 @@ abstract interface class MvvmBuilder {
   String write();
 }
 
+abstract interface class MvvmMixin extends MvvmBuilder {
+  String initialization();
+  String dispose();
+}
+
 abstract interface class CommandTypeDefinition {
   String type();
   String definition();

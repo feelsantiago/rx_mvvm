@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:rx_mvvm/rx_mvvm.dart';
 
 part 'counter_view_model.g.dart';
@@ -16,10 +18,8 @@ class CounterViewModel with _CounterCommands {
   }
 
   @Command()
-  Stream<int> _generate() {
-    return Stream.value(0);
+  Stream<int> _random() {
+    final rand = Random();
+    return Stream.value(rand.nextInt(100));
   }
-
-  @Command()
-  Future<void> _remove(int value) async {}
 }

@@ -1,6 +1,5 @@
 import 'package:example/counter_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:rx_mvvm/rx_mvvm.dart';
 
 class CounterView extends StatelessWidget {
   final String title;
@@ -32,6 +31,17 @@ class CounterView extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineMedium,
                 );
               },
+            ),
+            StreamBuilder(
+              stream: viewModel.onRandom.values,
+              initialData: 0,
+              builder: (context, snapshot) {
+                return Text('Random number from stream: ${snapshot.data}');
+              },
+            ),
+            ElevatedButton(
+              onPressed: viewModel.random,
+              child: const Text('Random'),
             ),
           ],
         ),

@@ -4,7 +4,6 @@ import 'package:rx_mvvm/rx_mvvm.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'class_builder.dart';
-import 'command_generator.dart';
 import 'commands_mixin_builder.dart';
 
 class ViewModelGenerator extends GeneratorForAnnotation<ViewModel> {
@@ -21,16 +20,9 @@ class ViewModelGenerator extends GeneratorForAnnotation<ViewModel> {
       );
     }
 
-    const checker = TypeChecker.fromRuntime(Command);
-    final commands = element.methods
-        .map((method) => CommandGenerator.from(method, checker))
-        .where((command) => command.defined())
-        .toList();
-
-    final rxcommands = CommandsMixinBuilder(element, commands);
+    final rxcommands = CommandsMixinBuilder(element);
     final builder = ClassBuilder(
       element,
-      commands,
       mixins: [rxcommands /*, injectable mixin*/],
     );
 

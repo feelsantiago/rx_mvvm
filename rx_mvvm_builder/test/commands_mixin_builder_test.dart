@@ -21,7 +21,7 @@ void main() {
       final element = MockClassElement();
       when(element.name).thenReturn('TestViewModel');
 
-      final mixin = CommandsMixinBuilder(element, commands);
+      final mixin = CommandsMixinBuilder.from(element, commands);
       final result = '''
         mixin _TestCommands {
             late final RxCommand<void, void> _onTest;

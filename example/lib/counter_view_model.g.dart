@@ -15,37 +15,26 @@ class _Counter extends CounterViewModel with _CounterCommands {
     );
     onAdd = CommandEvents(_onAdd);
 
-    _onGenerate = RxCommand.createFromStream(
-      (_) => super._generate(),
+    _onRandom = RxCommand.createFromStream(
+      (_) => super._random(),
       emitInitialCommandResult: false,
       emitsLastValueToNewSubscriptions: false,
     );
-    onGenerate = CommandEvents(_onGenerate);
-
-    _onRemove = RxCommand.createAsync(
-      super._remove,
-      emitInitialCommandResult: false,
-      emitsLastValueToNewSubscriptions: false,
-    );
-    onRemove = CommandEvents(_onRemove);
+    onRandom = CommandEvents(_onRandom);
   }
 
   void dispose() {
     onAdd.dispose();
-    onGenerate.dispose();
-    onRemove.dispose();
+    onRandom.dispose();
   }
 }
 
 mixin _CounterCommands {
   late final RxCommand<void, int> _onAdd;
   late final CommandEvents<void, int> onAdd;
-  late final RxCommand<void, int> _onGenerate;
-  late final CommandEvents<void, int> onGenerate;
-  late final RxCommand<int, void> _onRemove;
-  late final CommandEvents<int, void> onRemove;
+  late final RxCommand<void, int> _onRandom;
+  late final CommandEvents<void, int> onRandom;
 
   void add() => _onAdd();
-  void generate() => _onGenerate();
-  void remove(int param) => _onRemove(param);
+  void random() => _onRandom();
 }
