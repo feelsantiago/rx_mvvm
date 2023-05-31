@@ -24,3 +24,7 @@ abstract interface class CommandAnnotationDefinition {
   String options();
   bool exist();
 }
+
+abstract interface class CommandActionBuilder {
+  String generate();
+}

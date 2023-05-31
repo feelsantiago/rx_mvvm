@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:rx_mvvm_builder/src/command_action.dart';
 import 'package:rx_mvvm_builder/src/command_param.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -68,20 +69,11 @@ class CommandGenerator implements CommandBuilder {
   @override
   String initialization() {
     final action = name.command();
-    final options = switch (annotation.exist()) {
-      true => ', ${annotation.options()},',
-      false => '',
-    };
-
-    final command = switch (result.execution) {
-      CommandExecutionType.stream =>
-        'create${result.execution.alias}((${param.hasParam ? 'param' : '_'}) => super._${name.original}(${param.hasParam ? 'param' : ''})$options)',
-      _ =>
-        'create${execution.alias}${param.definition()}${result.definition()}(super._${name.original}$options)',
-    };
+    final command =
+        CommandAction.create(name, param, result, annotation, execution);
 
     return '''
-      _$action = RxCommand.$command;
+      _$action = ${command.generate()};
       $action = CommandEvents(_$action);
     ''';
   }
