@@ -9,9 +9,17 @@ class CounterViewModel with _CounterCommands {
   CounterViewModel._();
   factory CounterViewModel() = _Counter;
 
-  @Command(debugName: 'Counter')
+  @Command()
   int _add() {
     counter += 1;
     return counter;
   }
+
+  @Command()
+  Stream<int> _generate() {
+    return Stream.value(0);
+  }
+
+  @Command()
+  Future<void> _remove(int value) async {}
 }

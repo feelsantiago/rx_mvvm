@@ -12,9 +12,10 @@ void main() {
     group('Definition', () {
       test('Should generate command definition - No Param - No Result', () {
         final command = CommandGenerator(
-            name: Name('_test'),
-            isAsync: false,
-            annotation: const FakeCommandAnnotation());
+          name: Name('_test'),
+          isAsync: false,
+          annotation: const FakeCommandAnnotation(),
+        );
 
         final result = '''
         late final RxCommand<void, void> _onTest;
@@ -27,10 +28,11 @@ void main() {
 
       test('Should generate command definition - No Param', () {
         final command = CommandGenerator(
-            name: Name('_test'),
-            isAsync: false,
-            result: CommandResult.sync('String'),
-            annotation: const FakeCommandAnnotation());
+          name: Name('_test'),
+          isAsync: false,
+          result: CommandResult.sync('String'),
+          annotation: const FakeCommandAnnotation(),
+        );
 
         final result = '''
         late final RxCommand<void, String> _onTest;
@@ -43,11 +45,12 @@ void main() {
 
       test('Should generate command definition', () {
         final command = CommandGenerator(
-            name: Name('_test'),
-            isAsync: false,
-            result: CommandResult.sync('String'),
-            param: CommandParam.type('String'),
-            annotation: const FakeCommandAnnotation());
+          name: Name('_test'),
+          isAsync: false,
+          result: CommandResult.sync('String'),
+          param: CommandParam.type('String'),
+          annotation: const FakeCommandAnnotation(),
+        );
 
         final result = '''
         late final RxCommand<String, String> _onTest;
@@ -60,11 +63,12 @@ void main() {
 
       test('Should remove Future<> from return type on definition', () {
         final command = CommandGenerator(
-            name: Name('_test'),
-            isAsync: false,
-            result: CommandResult.async('Future<String>'),
-            param: CommandParam.type('String'),
-            annotation: const FakeCommandAnnotation());
+          name: Name('_test'),
+          isAsync: false,
+          result: CommandResult.async('Future<String>'),
+          param: CommandParam.type('String'),
+          annotation: const FakeCommandAnnotation(),
+        );
 
         final result = '''
         late final RxCommand<String, String> _onTest;
@@ -77,11 +81,12 @@ void main() {
 
       test('Should remove Stream<> from return type on definition', () {
         final command = CommandGenerator(
-            name: Name('_test'),
-            isAsync: false,
-            result: CommandResult.stream('Stream<String>'),
-            param: CommandParam.type('String'),
-            annotation: const FakeCommandAnnotation());
+          name: Name('_test'),
+          isAsync: false,
+          result: CommandResult.stream('Stream<String>'),
+          param: CommandParam.type('String'),
+          annotation: const FakeCommandAnnotation(),
+        );
 
         final result = '''
         late final RxCommand<String, String> _onTest;
@@ -96,10 +101,11 @@ void main() {
     group('Action', () {
       test('Should generate action with param', () {
         final command = CommandGenerator(
-            name: Name('_test'),
-            result: CommandResult.sync('String'),
-            param: CommandParam.type('String'),
-            annotation: const FakeCommandAnnotation());
+          name: Name('_test'),
+          result: CommandResult.sync('String'),
+          param: CommandParam.type('String'),
+          annotation: const FakeCommandAnnotation(),
+        );
 
         final result =
             'void test(String param) => _onTest(param);\n'.removeSpaces();
@@ -108,9 +114,10 @@ void main() {
 
       test('Should generate action without param', () {
         final command = CommandGenerator(
-            name: Name('_test'),
-            result: CommandResult.sync('String'),
-            annotation: const FakeCommandAnnotation());
+          name: Name('_test'),
+          result: CommandResult.sync('String'),
+          annotation: const FakeCommandAnnotation(),
+        );
 
         final result = 'void test() => _onTest();\n'.removeSpaces();
         expect(command.action().removeSpaces(), result);
@@ -122,7 +129,7 @@ void main() {
         final command = CommandGenerator(
           name: Name('test'),
           annotation: const FakeCommandAnnotation(
-            fParameter: 'debugName: true, restriction: super.other',
+            fOptions: 'debugName: true, restriction: super.other',
             fExist: true,
           ),
         );
@@ -168,10 +175,11 @@ void main() {
 
         test('Should intialize command', () {
           final command = CommandGenerator(
-              name: Name('_test'),
-              result: CommandResult.sync('String'),
-              param: CommandParam.type('String'),
-              annotation: const FakeCommandAnnotation());
+            name: Name('_test'),
+            result: CommandResult.sync('String'),
+            param: CommandParam.type('String'),
+            annotation: const FakeCommandAnnotation(),
+          );
 
           final result = '''
             _onTest = RxCommand.createSync(super._test);
@@ -186,9 +194,10 @@ void main() {
       group('Async', () {
         test('Should intialize command with no param and no return', () {
           final command = CommandGenerator(
-              isAsync: true,
-              name: Name('_test'),
-              annotation: const FakeCommandAnnotation());
+            isAsync: true,
+            name: Name('_test'),
+            annotation: const FakeCommandAnnotation(),
+          );
 
           final result = '''
             _onTest = RxCommand.createAsyncNoParamNoResult(super._test);
@@ -201,10 +210,11 @@ void main() {
 
         test('Should intialize command with no param', () {
           final command = CommandGenerator(
-              name: Name('_test'),
-              isAsync: true,
-              result: CommandResult.sync('String'),
-              annotation: const FakeCommandAnnotation());
+            name: Name('_test'),
+            isAsync: true,
+            result: CommandResult.sync('String'),
+            annotation: const FakeCommandAnnotation(),
+          );
 
           final result = '''
             _onTest = RxCommand.createAsyncNoParam(super._test);
@@ -217,14 +227,50 @@ void main() {
 
         test('Should intialize command', () {
           final command = CommandGenerator(
-              name: Name('_test'),
-              isAsync: true,
-              result: CommandResult.sync('String'),
-              param: CommandParam.type('String'),
-              annotation: const FakeCommandAnnotation());
+            name: Name('_test'),
+            isAsync: true,
+            result: CommandResult.sync('String'),
+            param: CommandParam.type('String'),
+            annotation: const FakeCommandAnnotation(),
+          );
 
           final result = '''
             _onTest = RxCommand.createAsync(super._test);
+            onTest = CommandEvents(_onTest);
+          '''
+              .removeSpaces();
+
+          expect(command.initialization().removeSpaces(), result);
+        });
+      });
+
+      group('Stream', () {
+        test('Should initialize from stream with param', () {
+          final command = CommandGenerator(
+            name: Name('_test'),
+            result: CommandResult.stream('String'),
+            param: CommandParam.type('String'),
+            annotation: const FakeCommandAnnotation(),
+          );
+
+          final result = '''
+            _onTest = RxCommand.createFromStream((param) => super._test(param));
+            onTest = CommandEvents(_onTest);
+          '''
+              .removeSpaces();
+
+          expect(command.initialization().removeSpaces(), result);
+        });
+
+        test('Should initialize from stream without param', () {
+          final command = CommandGenerator(
+            name: Name('_test'),
+            result: CommandResult.stream('String'),
+            annotation: const FakeCommandAnnotation(),
+          );
+
+          final result = '''
+            _onTest = RxCommand.createFromStream((_) => super._test());
             onTest = CommandEvents(_onTest);
           '''
               .removeSpaces();

@@ -68,13 +68,20 @@ class CommandGenerator implements CommandBuilder {
   @override
   String initialization() {
     final action = name.command();
-    final parameters = switch (annotation.exist()) {
-      true => ', ${annotation.parameters()},',
+    final options = switch (annotation.exist()) {
+      true => ', ${annotation.options()},',
       false => '',
     };
 
+    final command = switch (result.execution) {
+      CommandExecutionType.stream =>
+        'create${result.execution.alias}((${param.hasParam ? 'param' : '_'}) => super._${name.original}(${param.hasParam ? 'param' : ''})$options)',
+      _ =>
+        'create${execution.alias}${param.definition()}${result.definition()}(super._${name.original}$options)',
+    };
+
     return '''
-      _$action = RxCommand.create${execution.alias}${param.definition()}${result.definition()}(super._${name.original}$parameters);
+      _$action = RxCommand.$command;
       $action = CommandEvents(_$action);
     ''';
   }

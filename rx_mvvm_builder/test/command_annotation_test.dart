@@ -55,7 +55,7 @@ void main() {
       expect(command.restriction(), 'restriction: super.canExecute');
     });
 
-    test('Should get parameters', () {
+    test('Should get options', () {
       final annotation = MockDartObject();
       final debugName = MockDartObject();
       final restriction = MockDartObject();
@@ -76,7 +76,7 @@ void main() {
           'debugName: "TestDebug", emitInitialCommandResult: true, emitsLastValueToNewSubscriptions: false, restriction: super.canExecute';
 
       final command = CommandAnnotation(annotation);
-      expect(command.parameters(), result);
+      expect(command.options(), result);
     });
   });
 }

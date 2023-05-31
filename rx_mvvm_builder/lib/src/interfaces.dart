@@ -21,6 +21,6 @@ abstract interface class CommandAnnotationDefinition {
   String emitLastValue();
   String debugName();
   String restriction();
-  String parameters();
+  String options();
   bool exist();
 }

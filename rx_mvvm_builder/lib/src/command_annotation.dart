@@ -55,7 +55,7 @@ class CommandAnnotation implements CommandAnnotationDefinition {
   }
 
   @override
-  String parameters() {
+  String options() {
     return [
       debugName(),
       emitInitialValue(),

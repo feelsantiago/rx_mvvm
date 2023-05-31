@@ -4,7 +4,7 @@ class FakeCommandAnnotation implements CommandAnnotationDefinition {
   final String fDebugName;
   final String fEmitInitialValue;
   final String fEmitLastValue;
-  final String fParameter;
+  final String fOptions;
   final String fRestriction;
   final bool fExist;
 
@@ -12,7 +12,7 @@ class FakeCommandAnnotation implements CommandAnnotationDefinition {
     this.fDebugName = '',
     this.fEmitInitialValue = '',
     this.fEmitLastValue = '',
-    this.fParameter = '',
+    this.fOptions = '',
     this.fRestriction = '',
     this.fExist = false,
   });
@@ -33,8 +33,8 @@ class FakeCommandAnnotation implements CommandAnnotationDefinition {
   }
 
   @override
-  String parameters() {
-    return fParameter;
+  String options() {
+    return fOptions;
   }
 
   @override

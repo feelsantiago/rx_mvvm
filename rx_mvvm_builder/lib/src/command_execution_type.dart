@@ -3,7 +3,7 @@ import 'package:analyzer/dart/element/type.dart';
 enum CommandExecutionType {
   async(alias: 'Async'),
   sync(alias: 'Sync'),
-  stream(alias: 'Stream');
+  stream(alias: 'FromStream');
 
   final String alias;
 
