@@ -2,14 +2,14 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
 import 'package:rx_mvvm_builder/src/utils/name.dart';
 
-class ClassBuilder implements MvvmBuilder {
+class ViewModelBuilder implements MvvmBuilder {
   final ClassElement element;
   final List<MvvmMixin> mixins;
 
   @override
   String get name => '_${Name.from(element).base()}';
 
-  const ClassBuilder(
+  const ViewModelBuilder(
     this.element, {
     this.mixins = const [],
   });

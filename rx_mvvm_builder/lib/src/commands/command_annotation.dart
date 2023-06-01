@@ -2,6 +2,7 @@ import 'package:analyzer/dart/constant/value.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
 
 class CommandAnnotation implements CommandAnnotationDefinition {
+  // TODO: Use Options Patter Match
   final DartObject? annotation;
 
   const CommandAnnotation(this.annotation);
