@@ -1,9 +1,10 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:rx_mvvm/annotations.dart';
-import 'package:rx_mvvm_builder/src/command_generator.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
-import 'package:rx_mvvm_builder/src/name.dart';
+import 'package:rx_mvvm_builder/src/utils/name.dart';
 import 'package:source_gen/source_gen.dart';
+
+import 'command_generator.dart';
 
 class CommandsMixinBuilder implements MvvmMixin {
   final ClassElement element;

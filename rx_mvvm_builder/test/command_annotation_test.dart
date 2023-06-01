@@ -2,7 +2,7 @@
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rx_mvvm_builder/src/command_annotation.dart';
+import 'package:rx_mvvm_builder/src/commands/command_annotation.dart';
 import 'package:test/test.dart';
 
 import 'command_annotation_test.mocks.dart';

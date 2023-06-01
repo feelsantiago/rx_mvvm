@@ -1,4 +1,4 @@
-import 'package:rx_mvvm_builder/src/name.dart';
+import 'package:rx_mvvm_builder/src/utils/name.dart';
 import 'package:test/test.dart';
 
 void main() {

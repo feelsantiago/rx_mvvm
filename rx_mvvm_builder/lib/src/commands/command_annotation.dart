@@ -1,6 +1,5 @@
 import 'package:analyzer/dart/constant/value.dart';
-
-import 'interfaces.dart';
+import 'package:rx_mvvm_builder/src/interfaces.dart';
 
 class CommandAnnotation implements CommandAnnotationDefinition {
   final DartObject? annotation;

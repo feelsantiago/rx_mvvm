@@ -1,10 +1,10 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:rx_mvvm_builder/src/command_generator.dart';
-import 'package:rx_mvvm_builder/src/commands_mixin_builder.dart';
-import 'package:rx_mvvm_builder/src/name.dart';
-import 'package:rx_mvvm_builder/src/string_extensions.dart';
+import 'package:rx_mvvm_builder/src/commands/command_generator.dart';
+import 'package:rx_mvvm_builder/src/commands/commands_mixin_builder.dart';
+import 'package:rx_mvvm_builder/src/utils/name.dart';
+import 'package:rx_mvvm_builder/src/utils/string_extensions.dart';
 import 'package:test/test.dart';
 
 @GenerateNiceMocks([MockSpec<ClassElement>()])

@@ -1,13 +1,13 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:rx_mvvm_builder/src/command_action.dart';
-import 'package:rx_mvvm_builder/src/command_param.dart';
+import 'package:rx_mvvm_builder/src/commands/command_param.dart';
+import 'package:rx_mvvm_builder/src/interfaces.dart';
+import 'package:rx_mvvm_builder/src/utils/name.dart';
 import 'package:source_gen/source_gen.dart';
 
+import 'command_action.dart';
 import 'command_annotation.dart';
 import 'command_execution_type.dart';
 import 'command_result.dart';
-import 'interfaces.dart';
-import 'name.dart';
 
 class CommandGenerator implements CommandBuilder {
   final Name name;

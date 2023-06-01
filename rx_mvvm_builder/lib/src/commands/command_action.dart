@@ -1,9 +1,9 @@
 import 'package:rx_mvvm_builder/src/interfaces.dart';
+import 'package:rx_mvvm_builder/src/utils/name.dart';
 
 import 'command_execution_type.dart';
 import 'command_param.dart';
 import 'command_result.dart';
-import 'name.dart';
 
 abstract class CommandAction implements CommandActionBuilder {
   final Name action;

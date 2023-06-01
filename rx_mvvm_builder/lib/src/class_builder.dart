@@ -1,6 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
-import 'package:rx_mvvm_builder/src/name.dart';
+import 'package:rx_mvvm_builder/src/utils/name.dart';
 
 class ClassBuilder implements MvvmBuilder {
   final ClassElement element;

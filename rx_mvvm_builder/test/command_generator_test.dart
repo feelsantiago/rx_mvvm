@@ -1,8 +1,8 @@
-import 'package:rx_mvvm_builder/src/command_generator.dart';
-import 'package:rx_mvvm_builder/src/command_param.dart';
-import 'package:rx_mvvm_builder/src/command_result.dart';
-import 'package:rx_mvvm_builder/src/name.dart';
-import 'package:rx_mvvm_builder/src/string_extensions.dart';
+import 'package:rx_mvvm_builder/src/commands/command_generator.dart';
+import 'package:rx_mvvm_builder/src/commands/command_param.dart';
+import 'package:rx_mvvm_builder/src/commands/command_result.dart';
+import 'package:rx_mvvm_builder/src/utils/name.dart';
+import 'package:rx_mvvm_builder/src/utils/string_extensions.dart';
 import 'package:test/test.dart';
 
 import 'utils/fake_command_annotation.dart';
@@ -30,7 +30,7 @@ void main() {
         final command = CommandGenerator(
           name: Name('_test'),
           isAsync: false,
-          result: CommandResult.sync('String'),
+          result: const CommandResult.sync('String'),
           annotation: const FakeCommandAnnotation(),
         );
 
@@ -47,8 +47,8 @@ void main() {
         final command = CommandGenerator(
           name: Name('_test'),
           isAsync: false,
-          result: CommandResult.sync('String'),
-          param: CommandParam.type('String'),
+          result: const CommandResult.sync('String'),
+          param: const CommandParam.type('String'),
           annotation: const FakeCommandAnnotation(),
         );
 
@@ -65,8 +65,8 @@ void main() {
         final command = CommandGenerator(
           name: Name('_test'),
           isAsync: false,
-          result: CommandResult.async('Future<String>'),
-          param: CommandParam.type('String'),
+          result: const CommandResult.async('Future<String>'),
+          param: const CommandParam.type('String'),
           annotation: const FakeCommandAnnotation(),
         );
 
@@ -83,8 +83,8 @@ void main() {
         final command = CommandGenerator(
           name: Name('_test'),
           isAsync: false,
-          result: CommandResult.stream('Stream<String>'),
-          param: CommandParam.type('String'),
+          result: const CommandResult.stream('Stream<String>'),
+          param: const CommandParam.type('String'),
           annotation: const FakeCommandAnnotation(),
         );
 
@@ -102,8 +102,8 @@ void main() {
       test('Should generate action with param', () {
         final command = CommandGenerator(
           name: Name('_test'),
-          result: CommandResult.sync('String'),
-          param: CommandParam.type('String'),
+          result: const CommandResult.sync('String'),
+          param: const CommandParam.type('String'),
           annotation: const FakeCommandAnnotation(),
         );
 
@@ -115,7 +115,7 @@ void main() {
       test('Should generate action without param', () {
         final command = CommandGenerator(
           name: Name('_test'),
-          result: CommandResult.sync('String'),
+          result: const CommandResult.sync('String'),
           annotation: const FakeCommandAnnotation(),
         );
 
@@ -161,7 +161,7 @@ void main() {
         test('Should intialize command with no param', () {
           final command = CommandGenerator(
             name: Name('_test'),
-            result: CommandResult.sync('String'),
+            result: const CommandResult.sync('String'),
           );
 
           final result = '''
@@ -176,8 +176,8 @@ void main() {
         test('Should intialize command', () {
           final command = CommandGenerator(
             name: Name('_test'),
-            result: CommandResult.sync('String'),
-            param: CommandParam.type('String'),
+            result: const CommandResult.sync('String'),
+            param: const CommandParam.type('String'),
             annotation: const FakeCommandAnnotation(),
           );
 
@@ -212,7 +212,7 @@ void main() {
           final command = CommandGenerator(
             name: Name('_test'),
             isAsync: true,
-            result: CommandResult.sync('String'),
+            result: const CommandResult.sync('String'),
             annotation: const FakeCommandAnnotation(),
           );
 
@@ -229,8 +229,8 @@ void main() {
           final command = CommandGenerator(
             name: Name('_test'),
             isAsync: true,
-            result: CommandResult.sync('String'),
-            param: CommandParam.type('String'),
+            result: const CommandResult.sync('String'),
+            param: const CommandParam.type('String'),
             annotation: const FakeCommandAnnotation(),
           );
 
@@ -248,8 +248,8 @@ void main() {
         test('Should initialize from stream with param', () {
           final command = CommandGenerator(
             name: Name('_test'),
-            result: CommandResult.stream('String'),
-            param: CommandParam.type('String'),
+            result: const CommandResult.stream('String'),
+            param: const CommandParam.type('String'),
             annotation: const FakeCommandAnnotation(),
           );
 
@@ -265,7 +265,7 @@ void main() {
         test('Should initialize from stream without param', () {
           final command = CommandGenerator(
             name: Name('_test'),
-            result: CommandResult.stream('String'),
+            result: const CommandResult.stream('String'),
             annotation: const FakeCommandAnnotation(),
           );
 
