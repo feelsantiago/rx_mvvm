@@ -1,57 +1,60 @@
 import 'package:analyzer/dart/constant/value.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
 
 class CommandAnnotation implements CommandAnnotationDefinition {
-  // TODO: Use Options Patter Match
-  final DartObject? annotation;
+  final Option<DartObject> annotation;
 
-  const CommandAnnotation(this.annotation);
-  const CommandAnnotation.empty() : annotation = null;
+  CommandAnnotation(DartObject? annotation)
+      : annotation = Option.from(annotation);
+  const CommandAnnotation.empty() : annotation = const None();
 
   @override
   String debugName() {
-    final debugName = annotation!.getField('debugName');
+    final debug = annotation
+        .andThen((param) => Option.from(param.getField('debugName')))
+        .andThen((field) => Option.from(field.toStringValue()));
 
-    if (debugName != null && !debugName.isNull) {
-      return 'debugName: "${debugName.toStringValue()!}"';
-    }
-
-    return '';
+    return switch (debug) {
+      Some(some: final value) => 'debugName: "$value"',
+      None() => '',
+    };
   }
 
   @override
   String emitInitialValue() {
-    final emitInitialValue = annotation!.getField('emitInitialValue');
+    final initial = annotation
+        .andThen((param) => Option.from(param.getField('emitInitialValue')))
+        .andThen((field) => Option.from(field.toBoolValue()));
 
-    if (emitInitialValue != null && !emitInitialValue.isNull) {
-      final value = emitInitialValue.toBoolValue() ?? false;
-      return 'emitInitialCommandResult: $value';
-    }
-
-    return '';
+    return switch (initial) {
+      Some(some: final value) => 'emitInitialCommandResult: $value',
+      None() => '',
+    };
   }
 
   @override
   String emitLastValue() {
-    final emitLastValue = annotation!.getField('emitLastValue');
+    final last = annotation
+        .andThen((param) => Option.from(param.getField('emitLastValue')))
+        .andThen((field) => Option.from(field.toBoolValue()));
 
-    if (emitLastValue != null && !emitLastValue.isNull) {
-      final value = emitLastValue.toBoolValue() ?? false;
-      return 'emitsLastValueToNewSubscriptions: $value';
-    }
-
-    return '';
+    return switch (last) {
+      Some(some: final value) => 'emitsLastValueToNewSubscriptions: $value',
+      None() => '',
+    };
   }
 
   @override
   String restriction() {
-    final restriction = annotation!.getField('restriction');
+    final restriction = annotation
+        .andThen((param) => Option.from(param.getField('restriction')))
+        .andThen((field) => Option.from(field.toStringValue()));
 
-    if (restriction != null && !restriction.isNull) {
-      return 'restriction: super.${restriction.toStringValue()!}';
-    }
-
-    return '';
+    return switch (restriction) {
+      Some(some: final value) => 'restriction: super.$value',
+      None() => '',
+    };
   }
 
   @override
@@ -66,6 +69,6 @@ class CommandAnnotation implements CommandAnnotationDefinition {
 
   @override
   bool exist() {
-    return annotation != null;
+    return annotation.isSome();
   }
 }

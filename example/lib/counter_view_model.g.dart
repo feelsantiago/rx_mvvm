@@ -10,6 +10,7 @@ class _Counter extends CounterViewModel with _CounterCommands {
   _Counter() : super._() {
     _onAdd = RxCommand.createSyncNoParam(
       super._add,
+      debugName: "Test",
       emitInitialCommandResult: false,
       emitsLastValueToNewSubscriptions: false,
     );

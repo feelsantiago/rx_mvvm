@@ -15,6 +15,11 @@ dependencies:
   source_gen: ^1.3.2
   rx_mvvm:
     path: ../rx_mvvm
+  collection: ^1.17.1
+  oxidized:
+    git:
+      url: git@github.com:feelsantiago/oxidized.git
+      ref: pattern-support
 
 dev_dependencies:
   flutter_test:

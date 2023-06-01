@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:rx_mvvm/rx_mvvm.dart';
+import 'package:rx_mvvm_builder/src/view_model/constructor_mixin_builder.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'commands/commands_mixin_builder.dart';
@@ -20,15 +21,24 @@ class ViewModelGenerator extends GeneratorForAnnotation<ViewModel> {
       );
     }
 
-    final rxcommands = CommandsMixinBuilder(element);
-    final builder = ViewModelBuilder(
+    if (!element.isAbstract) {
+      throw InvalidGenerationSourceError(
+        '`@ViewModel` can only be used on abstract classes.',
+        element: element,
+      );
+    }
+
+    final commands = CommandsMixinBuilder(element);
+    final constructors = ConstructorMixinBuilder(element);
+
+    final viewModel = ViewModelBuilder(
       element,
-      mixins: [rxcommands /*, injectable mixin*/],
+      mixins: [commands /*, injectable mixin*/],
     );
 
     return '''
-      ${builder.write()}
-      ${rxcommands.write()}
+      ${viewModel.write()}
+      ${commands.write()}
     ''';
   }
 }

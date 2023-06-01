@@ -26,13 +26,16 @@ class CommandGenerator implements CommandBuilder {
 
   factory CommandGenerator.from(MethodElement method, TypeChecker command) {
     if (method.parameters.length > 1) {
-      throw Exception(
-          '`@Command` on method "${method.name}" - Commands must have only one parameter');
+      throw InvalidGenerationSourceError(
+        '`@Command` on method "${method.name}" - Commands must have only one parameter',
+        element: method,
+      );
     }
 
     if (!method.isPrivate) {
-      throw Exception(
+      throw InvalidGenerationSourceError(
         '`@Command` on method "${method.name}" - Commands actions should be private',
+        element: method,
       );
     }
 
