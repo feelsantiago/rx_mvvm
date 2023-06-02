@@ -1,82 +1,93 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:collection/collection.dart';
+import 'package:oxidized/oxidized.dart';
+import 'package:rx_mvvm_builder/src/interfaces.dart';
 import 'package:source_gen/source_gen.dart';
 
-class UnamedConstructorValidator {
-  final ConstructorElement? constructor;
-
-  UnamedConstructorValidator(this.constructor);
-
-  bool exist() {
-    return constructor != null;
-  }
-
-  bool isFactory() {
-    return exist() && constructor!.isFactory;
-  }
-}
-
-class PrivateConstructorValidator {
-  final ConstructorElement? constructor;
-
-  PrivateConstructorValidator(this.constructor);
-
-  bool exist() {
-    return constructor != null;
-  }
-
-  bool hasParams() {
-    return exist() && constructor!.parameters.isNotEmpty;
-  }
-}
-
-class ConstructorValidator {
+sealed class ConstructorValidatorBase implements BuilderValidator {
   final ClassElement element;
-  final ConstructorElement? unamed;
-  final ConstructorElement? private;
+  final Option<ConstructorElement> constructor;
 
-  const ConstructorValidator._(this.element, this.unamed, this.private);
+  const ConstructorValidatorBase(this.element, this.constructor);
+}
 
-  factory ConstructorValidator(ClassElement element) {
+final class UnamedConstructorValidator extends ConstructorValidatorBase {
+  const UnamedConstructorValidator._(super.element, super.constructor);
+  factory UnamedConstructorValidator(ClassElement element) {
     final unamed = element.constructors
         .firstWhereOrNull((constructor) => constructor.name.isEmpty);
-    final private = element.constructors
-        .firstWhereOrNull((constructor) => constructor.name == '_');
-
-    return ConstructorValidator._(element, unamed, private);
+    return UnamedConstructorValidator._(element, Option.from(unamed));
   }
 
-  void verify() {
-    final unamed = UnamedConstructorValidator(this.unamed);
+  @override
+  Result<bool, Error> validate() {
+    return constructor
+        .okOrElse(() => InvalidGenerationSourceError(
+              '`@ViewModel` must provide a unamed factory constructor.',
+              element: element,
+            ))
+        .andThen<bool>((constructor) {
+      return switch (constructor.isFactory) {
+        true => const Ok(true),
+        false => Err(
+            InvalidGenerationSourceError(
+              '`@ViewModel` unamed constructor must be a factory',
+              element: constructor,
+            ),
+          )
+      };
+    });
+  }
+}
 
-    if (!unamed.exist()) {
-      throw InvalidGenerationSourceError(
-        '`@ViewModel` must provide a unamed factory constructor',
-        element: element,
-      );
-    }
+final class PrivateConstructorValidator extends ConstructorValidatorBase {
+  const PrivateConstructorValidator._(super.element, super.constructor);
+  factory PrivateConstructorValidator(ClassElement element) {
+    final private = element.constructors
+        .firstWhereOrNull((constructor) => constructor.name == '_');
+    return PrivateConstructorValidator._(element, Option.from(private));
+  }
 
-    if (!unamed.isFactory()) {
-      throw InvalidGenerationSourceError(
-        '`@ViewModel` unamed constructor must be a factory',
-        element: this.unamed,
-      );
-    }
+  @override
+  Result<bool, Error> validate() {
+    return constructor
+        .okOrElse(() => InvalidGenerationSourceError(
+              '`@ViewModel` must provide a private named constructor `${element.name}._()` without params',
+              element: element,
+            ))
+        .andThen<bool>((constructor) {
+      return switch (constructor.parameters.isEmpty) {
+        true => const Ok(true),
+        false => Err(
+            InvalidGenerationSourceError(
+              '`@ViewModel` private constructor cannot have params',
+              element: constructor,
+            ),
+          )
+      };
+    });
+  }
+}
 
-    final private = PrivateConstructorValidator(this.private);
+final class ConstructorValidator {
+  final BuilderValidator unamed;
+  final BuilderValidator private;
 
-    if (!private.exist()) {
-      throw InvalidGenerationSourceError(
-        '`@ViewModel` must provide a private named constructor `${element.name}._()` without params',
-        element: element,
-      );
-    }
+  const ConstructorValidator._(this.unamed, this.private);
 
-    if (private.hasParams()) {
-      throw InvalidGenerationSourceError(
-        '`@ViewModel` private constructor cannot have params',
-        element: this.private,
-      );
-    }
+  factory ConstructorValidator(ClassElement element) {
+    final unamed = UnamedConstructorValidator(element);
+    final private = PrivateConstructorValidator(element);
+
+    return ConstructorValidator._(unamed, private);
+  }
+
+  Result<bool, Error> verify() {
+    return [unamed, private]
+        .map((validator) => validator.validate())
+        .firstWhere(
+          (validation) => validation.isErr(),
+          orElse: () => const Ok(true),
+        );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:oxidized/oxidized.dart';
+
 abstract interface class MvvmBuilder {
   String get name;
   String write();
@@ -32,4 +34,8 @@ abstract interface class CommandAnnotationDefinition {
 
 abstract interface class CommandActionBuilder {
   String generate();
+}
+
+abstract interface class BuilderValidator {
+  Result<bool, Error> validate();
 }
