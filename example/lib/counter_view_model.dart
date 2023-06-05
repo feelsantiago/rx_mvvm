@@ -9,7 +9,7 @@ abstract class CounterViewModel with _CounterCommands {
   int counter = 0;
 
   CounterViewModel._();
-  factory CounterViewModel() = _Counter;
+  factory CounterViewModel(int a) = _Counter;
 
   @Command(debugName: 'Test')
   int _add() {

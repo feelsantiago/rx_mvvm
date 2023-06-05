@@ -19,7 +19,7 @@ class ViewModelBuilder implements MvvmBuilder {
     return '''
         class $name extends ${element.name} with ${mixins.map((mixin) => mixin.name).join(', ')} {
            
-            $name(): super._() {
+            $name(int a): super._() {
               ${mixins.map((mixin) => mixin.initialization()).join('\n')}
             }
 

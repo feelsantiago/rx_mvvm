@@ -2,7 +2,8 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
 import 'package:rx_mvvm_builder/src/utils/name.dart';
-import 'package:rx_mvvm_builder/src/view_model/constructor_validator.dart';
+
+import 'constructor_validator.dart';
 
 class ConstructorMixinBuilder implements MvvmMixin {
   final ClassElement element;
@@ -33,13 +34,17 @@ class ConstructorMixinBuilder implements MvvmMixin {
 
   @override
   String initialization() {
-    // TODO: implement initialization
-    throw UnimplementedError();
+    return constructor.parameters
+        .map((param) => '_${param.name} = ${param.name};')
+        .join('\n');
   }
 
   @override
   String write() {
-    // TODO: implement write
-    throw UnimplementedError();
+    return '''
+      mixin $name {
+        ${constructor.parameters.map((param) => 'late final ${param.type.toString()} _${param.name};').join('\n')}
+      }
+    ''';
   }
 }

@@ -6,8 +6,9 @@ part of 'counter_view_model.dart';
 // ViewModelGenerator
 // **************************************************************************
 
-class _Counter extends CounterViewModel with _CounterCommands {
-  _Counter() : super._() {
+class _Counter extends CounterViewModel
+    with _CounterCommands, _CounterConstructor {
+  _Counter(int a) : super._() {
     _onAdd = RxCommand.createSyncNoParam(
       super._add,
       debugName: "Test",
@@ -22,12 +23,18 @@ class _Counter extends CounterViewModel with _CounterCommands {
       emitsLastValueToNewSubscriptions: false,
     );
     onRandom = CommandEvents(_onRandom);
+
+    _a = a;
   }
 
   void dispose() {
     onAdd.dispose();
     onRandom.dispose();
   }
+}
+
+mixin _CounterConstructor {
+  late final int _a;
 }
 
 mixin _CounterCommands {
