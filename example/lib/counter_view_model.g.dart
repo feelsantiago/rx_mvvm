@@ -8,7 +8,7 @@ part of 'counter_view_model.dart';
 
 class _Counter extends CounterViewModel
     with _CounterCommands, _CounterConstructor {
-  _Counter(int a) : super._() {
+  _Counter(int a, {required bool b, String? c}) : super._() {
     _onAdd = RxCommand.createSyncNoParam(
       super._add,
       debugName: "Test",
@@ -25,6 +25,8 @@ class _Counter extends CounterViewModel
     onRandom = CommandEvents(_onRandom);
 
     _a = a;
+    _b = b;
+    _c = c;
   }
 
   void dispose() {
@@ -35,6 +37,8 @@ class _Counter extends CounterViewModel
 
 mixin _CounterConstructor {
   late final int _a;
+  late final bool _b;
+  late final String? _c;
 }
 
 mixin _CounterCommands {

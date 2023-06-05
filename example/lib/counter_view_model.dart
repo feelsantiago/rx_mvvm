@@ -5,11 +5,11 @@ import 'package:rx_mvvm/rx_mvvm.dart';
 part 'counter_view_model.g.dart';
 
 @ViewModel()
-abstract class CounterViewModel with _CounterCommands {
+abstract class CounterViewModel with _CounterCommands, _CounterConstructor {
   int counter = 0;
 
   CounterViewModel._();
-  factory CounterViewModel(int a) = _Counter;
+  factory CounterViewModel(int a, {required bool b, String? c}) = _Counter;
 
   @Command(debugName: 'Test')
   int _add() {
