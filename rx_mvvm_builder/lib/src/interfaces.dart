@@ -15,10 +15,17 @@ abstract interface class CommandTypeDefinition {
   String definition();
 }
 
-abstract interface class CommandBuilder {
-  String definition();
-  String action();
+abstract interface class ElementBuilder {
   String initialization();
+  String definition();
+}
+
+abstract interface class ConstructorBuilder extends ElementBuilder {
+  String params();
+}
+
+abstract interface class CommandBuilder extends ElementBuilder {
+  String action();
   String dispose();
   bool defined();
 }

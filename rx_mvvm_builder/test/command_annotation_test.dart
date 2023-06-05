@@ -1,4 +1,3 @@
-@GenerateNiceMocks([MockSpec<DartObject>()])
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -7,6 +6,7 @@ import 'package:test/test.dart';
 
 import 'command_annotation_test.mocks.dart';
 
+@GenerateNiceMocks([MockSpec<DartObject>()])
 void main() {
   group('CommandAnnotation', () {
     test('Should get debugName', () {

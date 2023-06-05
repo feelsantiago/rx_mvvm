@@ -29,16 +29,17 @@ class ViewModelGenerator extends GeneratorForAnnotation<ViewModel> {
     }
 
     final commands = CommandsMixinBuilder(element);
-    final constructor = ConstructorMixinBuilder(element);
+    final dependency = ConstructorMixinBuilder(element);
 
     final viewModel = ViewModelBuilder(
       element,
-      mixins: [commands, constructor],
+      dependency.constructor,
+      mixins: [commands, dependency],
     );
 
     return '''
       ${viewModel.write()}
-      ${constructor.write()}
+      ${dependency.write()}
       ${commands.write()}
     ''';
   }

@@ -3,11 +3,12 @@ import 'package:oxidized/oxidized.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
 import 'package:rx_mvvm_builder/src/utils/name.dart';
 
+import 'constructor_generator.dart';
 import 'constructor_validator.dart';
 
 class ConstructorMixinBuilder implements MvvmMixin {
   final ClassElement element;
-  final ConstructorElement constructor;
+  final ConstructorBuilder constructor;
 
   const ConstructorMixinBuilder._(this.element, this.constructor);
   const ConstructorMixinBuilder.from(this.element, this.constructor);
@@ -21,7 +22,10 @@ class ConstructorMixinBuilder implements MvvmMixin {
     }
 
     final constructor = validator.constructor().unwrap();
-    return ConstructorMixinBuilder._(element, constructor);
+    return ConstructorMixinBuilder._(
+      element,
+      ConstructorGenerator(constructor),
+    );
   }
 
   @override
@@ -34,16 +38,14 @@ class ConstructorMixinBuilder implements MvvmMixin {
 
   @override
   String initialization() {
-    return constructor.parameters
-        .map((param) => '_${param.name} = ${param.name};')
-        .join('\n');
+    return constructor.initialization();
   }
 
   @override
   String write() {
     return '''
       mixin $name {
-        ${constructor.parameters.map((param) => 'late final ${param.type.toString()} _${param.name};').join('\n')}
+        ${constructor.definition()}
       }
     ''';
   }

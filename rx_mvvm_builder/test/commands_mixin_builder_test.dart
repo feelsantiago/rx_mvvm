@@ -8,7 +8,7 @@ import 'package:rx_mvvm_builder/src/utils/string_extensions.dart';
 import 'package:test/test.dart';
 
 @GenerateNiceMocks([MockSpec<ClassElement>()])
-import 'mixin_builder_test.mocks.dart';
+import 'commands_mixin_builder_test.mocks.dart';
 
 void main() {
   group('MixinBuilder', () {

@@ -4,13 +4,15 @@ import 'package:rx_mvvm_builder/src/utils/name.dart';
 
 class ViewModelBuilder implements MvvmBuilder {
   final ClassElement element;
+  final ConstructorBuilder constructor;
   final List<MvvmMixin> mixins;
 
   @override
   String get name => '_${Name.from(element).base()}';
 
   const ViewModelBuilder(
-    this.element, {
+    this.element,
+    this.constructor, {
     this.mixins = const [],
   });
 
@@ -19,7 +21,7 @@ class ViewModelBuilder implements MvvmBuilder {
     return '''
         class $name extends ${element.name} with ${mixins.map((mixin) => mixin.name).join(', ')} {
            
-            $name(int a): super._() {
+            $name(${constructor.params()}): super._() {
               ${mixins.map((mixin) => mixin.initialization()).join('\n')}
             }
 
