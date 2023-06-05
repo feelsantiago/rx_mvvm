@@ -4,14 +4,21 @@ import 'package:oxidized/oxidized.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
 import 'package:source_gen/source_gen.dart';
 
-sealed class ConstructorValidatorBase implements BuilderValidator {
+sealed class ConstructorValidatorBase
+    implements BuilderValidator<ConstructorElement> {
   final ClassElement element;
   final Option<ConstructorElement> constructor;
 
   const ConstructorValidatorBase(this.element, this.constructor);
+
+  @override
+  Option<ConstructorElement> value() {
+    return constructor;
+  }
 }
 
-final class UnamedConstructorValidator extends ConstructorValidatorBase {
+final class UnamedConstructorValidator extends ConstructorValidatorBase
+    implements BuilderValidator<ConstructorElement> {
   const UnamedConstructorValidator._(super.element, super.constructor);
   factory UnamedConstructorValidator(ClassElement element) {
     final unamed = element.constructors
@@ -70,8 +77,8 @@ final class PrivateConstructorValidator extends ConstructorValidatorBase {
 }
 
 final class ConstructorValidator {
-  final BuilderValidator unamed;
-  final BuilderValidator private;
+  final BuilderValidator<ConstructorElement> unamed;
+  final BuilderValidator<ConstructorElement> private;
 
   const ConstructorValidator._(this.unamed, this.private);
 
@@ -80,6 +87,10 @@ final class ConstructorValidator {
     final private = PrivateConstructorValidator(element);
 
     return ConstructorValidator._(unamed, private);
+  }
+
+  Option<ConstructorElement> constructor() {
+    return unamed.value();
   }
 
   Result<bool, Error> verify() {

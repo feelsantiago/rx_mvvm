@@ -36,6 +36,7 @@ abstract interface class CommandActionBuilder {
   String generate();
 }
 
-abstract interface class BuilderValidator {
+abstract interface class BuilderValidator<T extends Object> {
   Result<bool, Error> validate();
+  Option<T> value();
 }

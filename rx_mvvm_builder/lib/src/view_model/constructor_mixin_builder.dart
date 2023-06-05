@@ -6,18 +6,21 @@ import 'package:rx_mvvm_builder/src/view_model/constructor_validator.dart';
 
 class ConstructorMixinBuilder implements MvvmMixin {
   final ClassElement element;
+  final ConstructorElement constructor;
 
-  const ConstructorMixinBuilder._(this.element);
-  const ConstructorMixinBuilder.from(this.element);
+  const ConstructorMixinBuilder._(this.element, this.constructor);
+  const ConstructorMixinBuilder.from(this.element, this.constructor);
 
   factory ConstructorMixinBuilder(ClassElement element) {
-    final validation = ConstructorValidator(element).verify();
+    final validator = ConstructorValidator(element);
+    final validation = validator.verify();
 
     if (validation case Err(error: final error)) {
       throw error;
     }
 
-    return ConstructorMixinBuilder._(element);
+    final constructor = validator.constructor().unwrap();
+    return ConstructorMixinBuilder._(element, constructor);
   }
 
   @override
