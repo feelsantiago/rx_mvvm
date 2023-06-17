@@ -19,16 +19,18 @@ class ViewModelBuilder implements MvvmBuilder {
   @override
   String write() {
     return '''
-        class $name extends ${element.name} with ${mixins.map((mixin) => mixin.name).join(', ')} {
-           
-            $name(${constructor.params()}): super._() {
-              ${mixins.map((mixin) => mixin.initialization()).join('\n')}
-            }
-
-            void dispose() {
-              ${mixins.map((mixin) => mixin.dispose()).join('\n')}
-            }
+      class _ViewModel with ViewModelBase, ${mixins.map((mixin) => mixin.name).join(', ')} {
+        @override
+        void dispose() {
+          ${mixins.map((mixin) => mixin.dispose()).join('\n')}
         }
+      }
+
+      class $name extends ${element.name} {
+        $name(${constructor.params()}): super._() {
+          ${mixins.map((mixin) => mixin.initialization()).join('\n')}
+        }
+      }
     ''';
   }
 }

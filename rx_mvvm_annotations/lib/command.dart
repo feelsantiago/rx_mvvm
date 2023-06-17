@@ -1,7 +1,3 @@
-class ViewModel {
-  const ViewModel();
-}
-
 class Command {
   final bool emitInitialValue;
   final bool emitLastValue;

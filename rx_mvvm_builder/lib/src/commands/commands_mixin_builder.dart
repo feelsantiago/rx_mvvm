@@ -1,5 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:rx_mvvm/annotations.dart';
+import 'package:rx_mvvm_annotations/rx_mvvm_annoations.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
 import 'package:rx_mvvm_builder/src/utils/name.dart';
 import 'package:source_gen/source_gen.dart';

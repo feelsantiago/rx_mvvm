@@ -1,3 +1,4 @@
+import 'package:example/config.dart';
 import 'package:example/counter_view_model.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +7,7 @@ class CounterView extends StatelessWidget {
 
   CounterView({Key? key, required this.title}) : super(key: key);
 
-  final CounterViewModel viewModel = CounterViewModel();
+  final CounterViewModel viewModel = getIt<CounterViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +32,6 @@ class CounterView extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineMedium,
                 );
               },
-            ),
-            StreamBuilder(
-              stream: viewModel.onRandom.values,
-              initialData: 0,
-              builder: (context, snapshot) {
-                return Text('Random number from stream: ${snapshot.data}');
-              },
-            ),
-            ElevatedButton(
-              onPressed: viewModel.random,
-              child: const Text('Random'),
             ),
           ],
         ),

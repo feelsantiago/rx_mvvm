@@ -21,25 +21,18 @@ class ViewModelGenerator extends GeneratorForAnnotation<ViewModel> {
       );
     }
 
-    if (!element.isAbstract) {
-      throw InvalidGenerationSourceError(
-        '`@ViewModel` can only be used on abstract classes.',
-        element: element,
-      );
-    }
-
     final commands = CommandsMixinBuilder(element);
-    final dependency = ConstructorMixinBuilder(element);
+    final dependencies = ConstructorMixinBuilder(element);
 
     final viewModel = ViewModelBuilder(
       element,
-      dependency.constructor,
-      mixins: [commands, dependency],
+      dependencies.constructor,
+      mixins: [commands, dependencies],
     );
 
     return '''
       ${viewModel.write()}
-      ${dependency.write()}
+      ${dependencies.write()}
       ${commands.write()}
     ''';
   }

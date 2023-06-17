@@ -1,8 +1,13 @@
+import 'package:example/config.dart';
 import 'package:flutter/material.dart';
+import 'package:rx_mvvm/infra/injector.dart';
 
 import 'counter_view.dart';
 
 void main() {
+  configureDependencies();
+  Injector.init(getIt);
+
   runApp(const MyApp());
 }
 
