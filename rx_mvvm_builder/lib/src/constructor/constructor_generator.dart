@@ -9,7 +9,8 @@ class ConstructorGenerator implements ConstructorBuilder {
   @override
   String definition() {
     return constructor.parameters
-        .map((param) => 'late final ${param.type.toString()} _${param.name};')
+        .map((param) =>
+            '// ignore: unused_field\nlate final ${param.type.toString()} _${param.name};')
         .join('\n');
   }
 

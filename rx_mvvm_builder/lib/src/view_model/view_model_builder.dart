@@ -19,9 +19,11 @@ class ViewModelBuilder implements MvvmBuilder {
   @override
   String write() {
     return '''
-      class _ViewModel with ViewModelBase, ${mixins.map((mixin) => mixin.name).join(', ')} {
+      class _ViewModelBase with ViewModelBase, ${mixins.map((mixin) => mixin.name).join(', ')} {
         @override
-        void dispose() {
+        @mustCallSuper
+        Future<void> onDispose() async {
+          await super.onDispose();
           ${mixins.map((mixin) => mixin.dispose()).join('\n')}
         }
       }
