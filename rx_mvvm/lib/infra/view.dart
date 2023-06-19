@@ -42,7 +42,7 @@ abstract class View<T extends ViewModelBase> extends StatefulWidget {
   void onForegroundGained() {}
 
   void didChangeDependencies() {}
-  void afterFirstLayout(BuildContext context);
+  void afterFirstLayout(BuildContext context) {}
 
   @override
   State<StatefulWidget> createState() => _ViewState<T>();
@@ -105,7 +105,6 @@ class _ViewState<T extends ViewModelBase> extends State<View<T>> {
   @override
   Future<void> dispose() async {
     await viewModel.onDispose();
-
     super.dispose();
   }
 }
