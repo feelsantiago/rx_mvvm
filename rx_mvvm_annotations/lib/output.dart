@@ -1,5 +1,5 @@
 class Output {
-  final String? name;
+  final String? property;
 
-  const Output(this.name);
+  const Output({this.property});
 }

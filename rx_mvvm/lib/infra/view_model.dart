@@ -11,4 +11,6 @@ mixin ViewModelBase {
   Future<void> onDispose() async {
     await listeners.cancel();
   }
+
+  void binds(dynamic widget);
 }

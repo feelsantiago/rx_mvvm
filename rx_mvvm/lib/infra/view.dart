@@ -14,11 +14,6 @@ abstract class View<T extends ViewModelBase> extends StatefulWidget {
 
   Widget build(BuildContext context);
 
-  /// Use to bind widgets properties to viewmodel
-  /// Triggered before ViewModel onInit
-  /// Triggered before ViewModel onUpdate (every time widget update dependencies)
-  void binds() {}
-
   /// Triggered when either [onVisibilityLost] or [onForegroundLost] is called.
   /// Equivalent to onPause() on Android or viewDidDisappear() on iOS.
   void onFocusLost() {}
@@ -62,7 +57,7 @@ class _ViewState<T extends ViewModelBase> extends State<View<T>> {
     viewModel = Injector().get<T>();
     widget.bindViewModel(viewModel);
 
-    widget.binds();
+    viewModel.binds(widget);
     viewModel.onInit();
 
     WidgetsBinding.instance.endOfFrame.then(
@@ -95,9 +90,8 @@ class _ViewState<T extends ViewModelBase> extends State<View<T>> {
   void didUpdateWidget(covariant View<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // rebind after properties changes
+    viewModel.binds(widget);
     widget.bindViewModel(viewModel);
-    widget.binds();
 
     viewModel.onUpdate();
   }

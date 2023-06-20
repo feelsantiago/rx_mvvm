@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:rx_mvvm_annotations/rx_mvvm_annoations.dart';
+import 'package:rx_mvvm_builder/src/view_model/inputs_mixin_builder.dart';
 import 'package:source_gen/source_gen.dart';
 
 import 'commands/commands_mixin_builder.dart';
@@ -23,16 +24,19 @@ class ViewModelGenerator extends GeneratorForAnnotation<ViewModel> {
 
     final commands = CommandsMixinBuilder(element);
     final dependencies = ConstructorMixinBuilder(element);
+    final inputs = InputsMixinBuilder(element);
 
     final viewModel = ViewModelBuilder(
       element,
       dependencies.constructor,
+      inputs: inputs,
       mixins: [commands, dependencies],
     );
 
     return '''
       ${viewModel.write()}
       ${dependencies.write()}
+      ${inputs.write()}
       ${commands.write()}
     ''';
   }
