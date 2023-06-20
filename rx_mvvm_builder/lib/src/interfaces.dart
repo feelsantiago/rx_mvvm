@@ -47,3 +47,8 @@ abstract interface class BuilderValidator<T extends Object> {
   Result<bool, Error> validate();
   Option<T> value();
 }
+
+abstract interface class PropertyBind {
+  String binds();
+  void validate();
+}

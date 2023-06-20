@@ -11,7 +11,7 @@ class CounterViewModel extends _ViewModelBase {
   int counter = 0;
 
   @Input()
-  int get myVariable;
+  late int myVariable;
 
   CounterViewModel._();
   factory CounterViewModel(Service service) = _Counter;
@@ -22,6 +22,7 @@ class CounterViewModel extends _ViewModelBase {
     return counter;
   }
 
+  // TODO: fix this error
   int _test() {
     return 0;
   }

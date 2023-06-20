@@ -12,5 +12,5 @@ mixin ViewModelBase {
     await listeners.cancel();
   }
 
-  void binds(dynamic widget);
+  void binds(dynamic widget) {}
 }

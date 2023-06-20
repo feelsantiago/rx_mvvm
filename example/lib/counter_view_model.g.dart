@@ -7,19 +7,7 @@ part of 'counter_view_model.dart';
 // **************************************************************************
 
 class _ViewModelBase
-    with ViewModelBase, _InputsMixin, _CounterCommands, _CounterConstructor {
-  @override
-  void binds(dynamic widget) {
-    myVariable = widget.myVariable;
-  }
-
-  @override
-  @mustCallSuper
-  Future<void> onDispose() async {
-    await super.onDispose();
-    onAdd.dispose();
-  }
-}
+    with ViewModelBase, _CounterCommands, _CounterConstructor {}
 
 class _Counter extends CounterViewModel {
   _Counter(Service service) : super._() {
@@ -33,15 +21,23 @@ class _Counter extends CounterViewModel {
 
     _service = service;
   }
+
+  @override
+  void binds(dynamic widget) {
+    myVariable = widget.myVariable;
+  }
+
+  @override
+  @mustCallSuper
+  Future<void> onDispose() async {
+    await super.onDispose();
+    onAdd.dispose();
+  }
 }
 
 mixin _CounterConstructor {
   // ignore: unused_field
   late final Service _service;
-}
-
-mixin _InputsMixin {
-  late int myVariable;
 }
 
 mixin _CounterCommands {
