@@ -27,9 +27,4 @@ class InputBinds implements PropertyBind {
         .map((property) => '${property.name} = widget.${property.name};')
         .join('\n');
   }
-
-  @override
-  void validate() {
-    // TODO: implement validate
-  }
 }

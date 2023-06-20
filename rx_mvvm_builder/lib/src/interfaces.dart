@@ -50,5 +50,4 @@ abstract interface class BuilderValidator<T extends Object> {
 
 abstract interface class PropertyBind {
   String binds();
-  void validate();
 }
