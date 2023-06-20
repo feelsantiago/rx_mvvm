@@ -16,10 +16,7 @@ dependencies:
   rx_mvvm_annotations:
     path: ../rx_mvvm_annotations
   collection: ^1.17.1
-  oxidized:
-    git:
-      url: git@github.com:feelsantiago/oxidized.git
-      ref: pattern-support
+  oxidized: ^6.0.0
 
 dev_dependencies:
   flutter_test:

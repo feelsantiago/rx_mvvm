@@ -35,7 +35,7 @@ class PropertyAnnotation {
       None() => field.name,
     };
 
-    return Property(name, field.type.toString());
+    return Property(name, field.type.getDisplayString(withNullability: true));
   }
 
   bool defined() {

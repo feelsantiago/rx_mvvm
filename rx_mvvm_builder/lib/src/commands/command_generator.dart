@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:oxidized/oxidized.dart';
 import 'package:rx_mvvm_builder/src/commands/command_param.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
 import 'package:rx_mvvm_builder/src/utils/name.dart';
@@ -8,6 +9,7 @@ import 'command_action.dart';
 import 'command_annotation.dart';
 import 'command_execution_type.dart';
 import 'command_result.dart';
+import 'command_validator.dart';
 
 class CommandGenerator implements CommandBuilder {
   final Name name;
@@ -25,19 +27,12 @@ class CommandGenerator implements CommandBuilder {
   }) : execution = CommandExecutionType.isAsync(isAsync);
 
   factory CommandGenerator.from(MethodElement method, TypeChecker command) {
-    // TODO: should validate for errors and throw only if is a command, move from here
-    if (method.parameters.length > 1) {
-      throw InvalidGenerationSourceError(
-        '`@Command` on method "${method.name}" - Commands must have only one parameter',
-        element: method,
-      );
-    }
+    final annotation =
+        CommandAnnotation(command.firstAnnotationOfExact(method));
 
-    if (!method.isPrivate) {
-      throw InvalidGenerationSourceError(
-        '`@Command` on method "${method.name}" - Commands actions should be private',
-        element: method,
-      );
+    final validator = CommandValidator(method, annotation);
+    if (validator.validate() case Err(error: final error)) {
+      throw error;
     }
 
     return CommandGenerator(
@@ -45,7 +40,7 @@ class CommandGenerator implements CommandBuilder {
       isAsync: method.isAsynchronous,
       param: CommandParam.from(method),
       result: CommandResult.from(method),
-      annotation: CommandAnnotation(command.firstAnnotationOfExact(method)),
+      annotation: annotation,
     );
   }
 
