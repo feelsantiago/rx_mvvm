@@ -24,7 +24,7 @@ class InputBinds implements PropertyBind {
   @override
   String binds() {
     return properties
-        .map((property) => '${property.name} = widget.${property.name};')
+        .map((property) => '${property.name} = widget.${property.bind};')
         .join('\n');
   }
 }

@@ -10,8 +10,12 @@ class Service {}
 class CounterViewModel extends _ViewModelBase {
   int counter = 0;
 
+  // listeners.sink = onChange.stream.listen((value) => widget.onChange(value));
+
   @Input()
   late int myVariable;
+
+  EventEmitter<String> onChange = EventEmitter();
 
   CounterViewModel._();
   factory CounterViewModel(Service service) = _Counter;
@@ -20,10 +24,5 @@ class CounterViewModel extends _ViewModelBase {
   int _add() {
     counter += 1;
     return counter;
-  }
-
-  // TODO: fix this error
-  int _test() {
-    return 0;
   }
 }

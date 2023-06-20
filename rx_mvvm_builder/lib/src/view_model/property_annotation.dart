@@ -6,8 +6,9 @@ import 'package:source_gen/source_gen.dart';
 class Property {
   final String name;
   final String type;
+  final String bind;
 
-  Property(this.name, this.type);
+  Property(this.name, this.type, this.bind);
 
   @override
   String toString() {
@@ -30,12 +31,13 @@ class PropertyAnnotation {
         .andThen((param) => Option.from(param.getField('property')))
         .andThen((field) => Option.from(field.toStringValue()));
 
-    final name = switch (property) {
+    final bind = switch (property) {
       Some(some: final value) => value,
       None() => field.name,
     };
 
-    return Property(name, field.type.getDisplayString(withNullability: true));
+    final type = field.type.getDisplayString(withNullability: true);
+    return Property(field.name, type, bind);
   }
 
   bool defined() {

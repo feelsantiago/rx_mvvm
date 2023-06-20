@@ -374,12 +374,11 @@ packages:
   oxidized:
     dependency: transitive
     description:
-      path: "."
-      ref: pattern-support
-      resolved-ref: e602942eb2ed4f969e9ca41affde3cff3ea468b6
-      url: "git@github.com:feelsantiago/oxidized.git"
-    source: git
-    version: "5.3.0"
+      name: oxidized
+      sha256: a407adf667d304c02cdc9b8394f0efcd95bf4069158b269af77583cc4eab0f3b
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.0"
   package_config:
     dependency: transitive
     description:
