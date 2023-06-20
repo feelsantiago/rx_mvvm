@@ -25,6 +25,7 @@ class CommandGenerator implements CommandBuilder {
   }) : execution = CommandExecutionType.isAsync(isAsync);
 
   factory CommandGenerator.from(MethodElement method, TypeChecker command) {
+    // TODO: should validate for errors and throw only if is a command, move from here
     if (method.parameters.length > 1) {
       throw InvalidGenerationSourceError(
         '`@Command` on method "${method.name}" - Commands must have only one parameter',

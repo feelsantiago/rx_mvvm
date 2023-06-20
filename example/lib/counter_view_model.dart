@@ -18,4 +18,8 @@ class CounterViewModel extends _ViewModelBase {
     counter += 1;
     return counter;
   }
+
+  int _test() {
+    return 0;
+  }
 }
