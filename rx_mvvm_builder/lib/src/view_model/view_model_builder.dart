@@ -1,7 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:rx_mvvm_builder/src/binds/input_binds.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
 import 'package:rx_mvvm_builder/src/utils/name.dart';
-import 'package:rx_mvvm_builder/src/view_model/input_binds.dart';
 
 class ViewModelBuilder implements MvvmBuilder {
   final ClassElement element;

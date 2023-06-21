@@ -1,8 +1,9 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:rx_mvvm_annotations/input.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
-import 'package:rx_mvvm_builder/src/view_model/property_annotation.dart';
 import 'package:source_gen/source_gen.dart';
+
+import 'property_annotation.dart';
 
 class InputBinds implements PropertyBind {
   final List<Property> properties;
