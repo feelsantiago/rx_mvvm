@@ -25,12 +25,17 @@ class _Counter extends CounterViewModel {
   @override
   void binds(dynamic widget) {
     myVariable = widget.myVariable;
+
+    output.subscribe((value) => widget.output(value));
   }
 
   @override
   @mustCallSuper
   Future<void> onDispose() async {
     await super.onDispose();
+
+    output.close();
+
     onAdd.dispose();
   }
 }

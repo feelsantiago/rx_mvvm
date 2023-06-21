@@ -50,7 +50,7 @@ class OutputPropertyBind implements PropertyBindEvent {
 
   @override
   String dispose() {
-    return '${property.name}.close()';
+    return '${property.name}.close();';
   }
 }
 

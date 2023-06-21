@@ -10,10 +10,11 @@ class Service {}
 class CounterViewModel extends _ViewModelBase {
   int counter = 0;
 
-  // listeners.sink = onChange.stream.listen((value) => widget.onChange(value));
-
   @Input()
   late int myVariable;
+
+  @Output()
+  final EventEmitter<String> output = EventEmitter();
 
   EventEmitter<String> onChange = EventEmitter();
 
