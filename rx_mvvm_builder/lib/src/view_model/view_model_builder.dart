@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:rx_mvvm_builder/src/binds/input_binds.dart';
+import 'package:rx_mvvm_builder/src/binds/output_binds.dart';
 import 'package:rx_mvvm_builder/src/interfaces.dart';
 import 'package:rx_mvvm_builder/src/utils/name.dart';
 
@@ -7,6 +8,7 @@ class ViewModelBuilder implements MvvmBuilder {
   final ClassElement element;
   final ConstructorBuilder constructor;
   final PropertyBind inputs;
+  final PropertyBindEvent outputs;
   final List<MvvmMixin> mixins;
 
   @override
@@ -16,6 +18,7 @@ class ViewModelBuilder implements MvvmBuilder {
     this.element, {
     required this.constructor,
     this.inputs = const InputBinds.empyt(),
+    this.outputs = const OutputBinds.empyt(),
     this.mixins = const [],
   });
 
@@ -33,12 +36,17 @@ class ViewModelBuilder implements MvvmBuilder {
         @override
         void binds(dynamic widget) {
           ${inputs.binds()} 
+
+          ${outputs.binds()} 
         }
 
         @override
         @mustCallSuper
         Future<void> onDispose() async {
           await super.onDispose();
+
+          ${outputs.dispose()}
+
           ${mixins.map((mixin) => mixin.dispose()).join('\n')}
         }
       }

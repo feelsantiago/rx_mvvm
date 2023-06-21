@@ -1,17 +1,26 @@
-import 'dart:async';
+typedef EventHandler<T> = void Function(T arg);
 
 class EventEmitter<T> {
-  final StreamController<T> _controller;
+  late EventHandler<T> _handler;
 
-  Stream<T> get stream => _controller.stream;
+  bool _closed = false;
+  bool get isClosed => _closed;
 
-  EventEmitter() : _controller = StreamController.broadcast();
-
-  void emit(T value) {
-    _controller.sink.add(value);
+  void subscribe(EventHandler<T> handler) {
+    _handler = handler;
   }
 
-  Future<void> close() async {
-    await _controller.close();
+  void operator +(EventHandler<T> handler) {
+    _handler = handler;
+  }
+
+  void close() {
+    _closed = true;
+  }
+
+  void emit(T value) {
+    if (!_closed) {
+      _handler(value);
+    }
   }
 }

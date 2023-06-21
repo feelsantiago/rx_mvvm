@@ -7,8 +7,9 @@ class Property {
   final String name;
   final String type;
   final String bind;
+  final FieldElement field;
 
-  Property(this.name, this.type, this.bind);
+  Property(this.name, this.type, this.bind, this.field);
 
   @override
   String toString() {
@@ -37,7 +38,7 @@ class PropertyAnnotation {
     };
 
     final type = field.type.getDisplayString(withNullability: true);
-    return Property(field.name, type, bind);
+    return Property(field.name, type, bind, field);
   }
 
   bool defined() {

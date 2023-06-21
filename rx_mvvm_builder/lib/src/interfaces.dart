@@ -1,13 +1,16 @@
 import 'package:oxidized/oxidized.dart';
 
+abstract interface class Disposable {
+  String dispose();
+}
+
 abstract interface class MvvmBuilder {
   String get name;
   String write();
 }
 
-abstract interface class MvvmMixin extends MvvmBuilder {
+abstract interface class MvvmMixin extends MvvmBuilder implements Disposable {
   String initialization();
-  String dispose();
 }
 
 abstract interface class CommandTypeDefinition {
@@ -24,9 +27,9 @@ abstract interface class ConstructorBuilder extends ElementBuilder {
   String params();
 }
 
-abstract interface class CommandBuilder extends ElementBuilder {
+abstract interface class CommandBuilder extends ElementBuilder
+    implements Disposable {
   String action();
-  String dispose();
   bool defined();
 }
 
@@ -51,3 +54,6 @@ abstract interface class BuilderValidator<T extends Object> {
 abstract interface class PropertyBind {
   String binds();
 }
+
+abstract interface class PropertyBindEvent extends PropertyBind
+    implements Disposable {}
