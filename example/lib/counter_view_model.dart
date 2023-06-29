@@ -16,12 +16,10 @@ class CounterViewModel extends _ViewModelBase {
   @Output()
   final EventEmitter<String> output = EventEmitter();
 
-  EventEmitter<String> onChange = EventEmitter();
-
   CounterViewModel._();
   factory CounterViewModel(Service service) = _Counter;
 
-  @Command(debugName: 'Test')
+  @Command()
   int _add() {
     counter += 1;
     return counter;

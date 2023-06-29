@@ -1,5 +1,7 @@
+import 'package:beamer/beamer.dart';
 import 'package:example/config.dart';
 import 'package:example/counter_view_model.dart';
+import 'package:example/router_outlet.dart';
 import 'package:flutter/material.dart';
 
 class CounterView extends StatelessWidget {
@@ -37,7 +39,10 @@ class CounterView extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: viewModel.add,
+        // onPressed: viewModel.add,
+        onPressed: () {
+          RouterOutlet.of(context).beamer.currentContext!.beamToNamed('/other');
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),

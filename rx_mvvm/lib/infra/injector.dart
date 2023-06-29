@@ -19,7 +19,7 @@ class Injector {
     Injector._instance = Injector._(getIt);
   }
 
-  T get<T>() {
+  T get<T extends Object>() {
     return getIt<T>();
   }
 }
