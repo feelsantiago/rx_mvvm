@@ -13,7 +13,6 @@ class _Counter extends CounterViewModel {
   _Counter(Service service) : super._() {
     _onAdd = RxCommand.createSyncNoParam(
       super._add,
-      debugName: "Test",
       emitInitialCommandResult: false,
       emitsLastValueToNewSubscriptions: false,
     );
