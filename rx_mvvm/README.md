@@ -162,12 +162,12 @@ class CounterView extends RxView<CounterViewModel> {
 }
 ```
 
-`this.viewModel` - Is available in all classe and all life cycle methods.
-`this.viewModel.{commandName}` - each command have a public version to be called.
-`this.viewModel.on{commandName}` - each command has a property with all events
-`values` - Stream of returned values
-`results` - Stream of `CommandsResults`
-`exceptions` - Stream of errors
-`executing` - Stream of command current state
-`canExecute` - Stream of command availability
-`command` - Command object
+- `this.viewModel` - Is available in all classe and all life cycle methods.
+- `this.viewModel.{commandName}` - each command have a public version to be called.
+- `this.viewModel.on{commandName}` - each command has a property with all events
+  - `values` - Stream of returned values
+  - `results` - Stream of `CommandsResults`
+  - `exceptions` - Stream of errors
+  - `executing` - Stream of command current state
+  - `canExecute` - Stream of command availability
+  - `command` - Command object
