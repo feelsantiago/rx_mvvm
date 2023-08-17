@@ -462,21 +462,21 @@ packages:
       path: "../rx_mvvm"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.0"
   rx_mvvm_annotations:
     dependency: transitive
     description:
       path: "../rx_mvvm_annotations"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.0"
   rx_mvvm_builder:
     dependency: "direct dev"
     description:
       path: "../rx_mvvm_builder"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.0"
   rxdart:
     dependency: transitive
     description:

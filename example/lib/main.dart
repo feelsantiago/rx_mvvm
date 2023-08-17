@@ -3,7 +3,7 @@ import 'package:example/config.dart';
 import 'package:example/counter_view.dart';
 import 'package:example/router_outlet.dart';
 import 'package:flutter/material.dart';
-import 'package:rx_mvvm/infra/injector.dart';
+import 'package:rx_mvvm/rx_mvvm.dart';
 
 class CounterLocation extends BeamLocation<BeamState> {
   @override

@@ -10,6 +10,7 @@ export 'package:flutter/foundation.dart' show mustCallSuper;
 
 export 'infra/view.dart';
 export 'infra/view_model.dart';
+export 'infra/injector.dart';
 
 export 'utils/listener_sink.dart';
 export 'utils/event_emitter.dart';

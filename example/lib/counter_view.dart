@@ -1,15 +1,11 @@
-import 'package:beamer/beamer.dart';
-import 'package:example/config.dart';
 import 'package:example/counter_view_model.dart';
-import 'package:example/router_outlet.dart';
 import 'package:flutter/material.dart';
+import 'package:rx_mvvm/rx_mvvm.dart';
 
-class CounterView extends StatelessWidget {
+class CounterView extends RxView<CounterViewModel> {
   final String title;
 
   CounterView({Key? key, required this.title}) : super(key: key);
-
-  final CounterViewModel viewModel = getIt<CounterViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +35,7 @@ class CounterView extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        // onPressed: viewModel.add,
-        onPressed: () {
-          RouterOutlet.of(context).beamer.currentContext!.beamToNamed('/other');
-        },
+        onPressed: viewModel.add,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),

@@ -5,12 +5,12 @@ import 'package:rx_mvvm/infra/view_model_provider.dart';
 import 'injector.dart';
 import 'view_model.dart';
 
-abstract class View<T extends ViewModelBase> extends StatefulWidget {
+abstract class RxView<T extends ViewModelBase> extends StatefulWidget {
   // INavigator get navigator => getIt<INavigator>();
   final ViewModelProvider<T> _provider = ViewModelProvider.empty();
   T get viewModel => _provider.viewModel;
 
-  View({Key? key}) : super(key: key);
+  RxView({Key? key}) : super(key: key);
 
   Widget build(BuildContext context);
 
@@ -47,7 +47,7 @@ abstract class View<T extends ViewModelBase> extends StatefulWidget {
   }
 }
 
-class _ViewState<T extends ViewModelBase> extends State<View<T>> {
+class _ViewState<T extends ViewModelBase> extends State<RxView<T>> {
   late final T viewModel;
 
   @override
@@ -87,7 +87,7 @@ class _ViewState<T extends ViewModelBase> extends State<View<T>> {
   }
 
   @override
-  void didUpdateWidget(covariant View<T> oldWidget) {
+  void didUpdateWidget(covariant RxView<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     viewModel.binds(widget);
