@@ -2,8 +2,6 @@ name: rx_mvvm_annotations
 description: Reactive MVVM Pattern Annotations
 version: 1.0.0
 maintainer: Filipe Santiago (@feelssantiago)
-authors:
-  - Filipe Santiago <porto.santiago@hotmail.com>
 homepage: https://github.com/feelsantiago/rx_mvvm
 documentation:
 
