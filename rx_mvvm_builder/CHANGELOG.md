@@ -1,3 +1,7 @@
+## [1.1.1] - 27/03/2024
+
+- Fix lib start file name
+
 ## [1.1.0] - 27/03/2024
 
 - Fix breaking changes for errors that now implements Exceptions

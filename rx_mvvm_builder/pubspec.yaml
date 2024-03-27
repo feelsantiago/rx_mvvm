@@ -1,6 +1,6 @@
 name: rx_mvvm_builder
 description: Reactive MVVM Pattern Builder
-version: 1.0.0
+version: 1.1.1
 maintainer: Filipe Santiago (@feelssantiago)
 homepage: https://github.com/feelsantiago/rx_mvvm
 documentation:

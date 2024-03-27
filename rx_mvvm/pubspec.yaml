@@ -1,6 +1,6 @@
 name: rx_mvvm
 description: Reactive MVVM Pattern
-version: 1.0.1
+version: 1.0.2
 maintainer: Filipe Santiago (@feelssantiago)
 homepage: https://github.com/feelsantiago/rx_mvvm
 documentation:

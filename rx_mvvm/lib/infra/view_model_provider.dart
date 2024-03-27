@@ -12,7 +12,6 @@ class ViewModelProvider<T extends ViewModelBase> {
   }
 
   change(T viewModel) {
-    assert(this._viewModel != null);
     this._viewModel = viewModel;
   }
 }

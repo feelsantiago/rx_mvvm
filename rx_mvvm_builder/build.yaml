@@ -1,7 +1,7 @@
 # Read about `build.yaml` at https://pub.dev/packages/build_config
 builders:
   view_model_generator:
-    import: "package:rx_mvvm_builder/builder.dart"
+    import: "package:rx_mvvm_builder/rx_mvvm_builder.dart"
     builder_factories: ["viewModelBuilder"]
     build_extensions: { ".dart": [".vm_generator.g.part"] }
     auto_apply: dependents
