@@ -27,7 +27,7 @@ final class UnamedConstructorValidator extends ConstructorValidatorBase
   }
 
   @override
-  Result<bool, Error> validate() {
+  Result<bool, Exception> validate() {
     return constructor
         .okOrElse(() => InvalidGenerationSourceError(
               '`@ViewModel` must provide a unamed factory constructor.',

@@ -11,7 +11,7 @@ class CommandValidator implements BuilderValidator<MethodElement> {
   CommandValidator(this.method, this.annotation);
 
   @override
-  Result<bool, Error> validate() {
+  Result<bool, Exception> validate() {
     if (annotation.exist()) {
       if (method.parameters.length > 1) {
         return Err(InvalidGenerationSourceError(

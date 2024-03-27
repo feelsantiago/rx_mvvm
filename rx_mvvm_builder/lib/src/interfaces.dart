@@ -47,7 +47,7 @@ abstract interface class CommandActionBuilder {
 }
 
 abstract interface class BuilderValidator<T extends Object> {
-  Result<bool, Error> validate();
+  Result<bool, Exception> validate();
   Option<T> value();
 }
 
