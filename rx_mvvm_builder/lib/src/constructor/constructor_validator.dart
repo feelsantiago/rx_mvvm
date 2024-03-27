@@ -56,7 +56,7 @@ final class PrivateConstructorValidator extends ConstructorValidatorBase {
   }
 
   @override
-  Result<bool, Error> validate() {
+  Result<bool, Exception> validate() {
     return constructor
         .okOrElse(() => InvalidGenerationSourceError(
               '`@ViewModel` must provide a private named constructor `${element.name}._()` without params',
@@ -93,7 +93,7 @@ final class ConstructorValidator {
     return unamed.value();
   }
 
-  Result<bool, Error> verify() {
+  Result<bool, Exception> verify() {
     return [unamed, private]
         .map((validator) => validator.validate())
         .firstWhere(

@@ -17,7 +17,7 @@ class OutputPropertyValidator implements BuilderValidator {
   }
 
   @override
-  Result<bool, Error> validate() {
+  Result<bool, Exception> validate() {
     if (property.type.contains('EventEmitter')) {
       return const Ok(true);
     }
