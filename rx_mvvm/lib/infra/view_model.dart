@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:rx_mvvm/utils/listener_sink.dart';
 
 mixin ViewModelBase {
@@ -6,9 +5,9 @@ mixin ViewModelBase {
 
   void onInit() {}
   void onUpdate() {}
+  void onDispose() {}
 
-  @mustCallSuper
-  Future<void> onDispose() async {
+  Future<void> close() async {
     await listeners.cancel();
   }
 

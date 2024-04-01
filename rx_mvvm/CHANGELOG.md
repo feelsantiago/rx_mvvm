@@ -1,3 +1,7 @@
+## [1.1.0] - 01/04/2024
+
+- Change dispose to internal use and expose onDispose method to override
+
 ## [1.0.3] - 27/03/2024
 
 - Don't verify current view model to change it on provider

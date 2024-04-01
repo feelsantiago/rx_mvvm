@@ -1,3 +1,7 @@
+## [1.1.2] - 01/04/2024
+
+- Implement new close and onDispose method
+
 ## [1.1.1] - 27/03/2024
 
 - Fix lib start file name

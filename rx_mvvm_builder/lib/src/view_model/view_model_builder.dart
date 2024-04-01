@@ -41,9 +41,8 @@ class ViewModelBuilder implements MvvmBuilder {
         }
 
         @override
-        @mustCallSuper
-        Future<void> onDispose() async {
-          await super.onDispose();
+        Future<void> close() async {
+          await super.close();
 
           ${outputs.dispose()}
 
