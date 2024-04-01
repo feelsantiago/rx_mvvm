@@ -1,3 +1,7 @@
+## [1.1.1] - 01/04/2024
+
+- Call flutter dispose first
+
 ## [1.1.0] - 01/04/2024
 
 - Change dispose to internal use and expose onDispose method to override

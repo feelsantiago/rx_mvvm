@@ -98,8 +98,9 @@ class _ViewState<T extends ViewModelBase> extends State<RxView<T>> {
 
   @override
   Future<void> dispose() async {
-    await viewModel.close();
-    viewModel.onDispose();
     super.dispose();
+    viewModel.onDispose();
+
+    await viewModel.close();
   }
 }
